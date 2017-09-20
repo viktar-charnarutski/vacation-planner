@@ -11,8 +11,13 @@ public class DateRange {
     private final LocalDate endDate;
 
     public DateRange(LocalDate startDate, LocalDate endDate) {
+        checkArguments(startDate, endDate);
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    private static void checkArguments(LocalDate startDate, LocalDate endDate) {
+        checkDates(startDate, endDate);
     }
 
     public LocalDate startDate() {
@@ -43,5 +48,11 @@ public class DateRange {
         int result = startDate.hashCode();
         result = 31 * result + endDate.hashCode();
         return result;
+    }
+
+    private static void checkDates(LocalDate startDate, LocalDate endDate) {
+        if (startDate.isBefore(endDate) || startDate.equals(endDate))
+            throw new IllegalArgumentException(String.format("The start date %s should be after the end date %s",
+                    startDate, endDate));
     }
 }

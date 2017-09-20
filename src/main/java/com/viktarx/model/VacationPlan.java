@@ -15,7 +15,7 @@ public class VacationPlan {
     private final String departureCity;
     private final String destinationCity;
 
-    private Set<DateRange> dateRanges = new HashSet<>();
+    private final Set<DateRange> dateRanges = new HashSet<>();
 
     public VacationPlan(LocalDate possibleStartDate, LocalDate possibleEndDate, int minDurationInDays, String departureCity,
                         String destinationCity) {
