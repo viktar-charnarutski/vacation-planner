@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 /**
- *
+ * The class represents a time duration with start and end dates.
  */
 public class DateRange {
     private final LocalDate startDate;
@@ -16,8 +16,14 @@ public class DateRange {
         this.endDate = endDate;
     }
 
-    private static void checkArguments(LocalDate startDate, LocalDate endDate) {
+    private void checkArguments(LocalDate startDate, LocalDate endDate) {
         checkDates(startDate, endDate);
+    }
+    
+    private void checkDates(LocalDate startDate, LocalDate endDate) {
+        if (endDate.isBefore(startDate) || startDate.equals(endDate))
+            throw new IllegalArgumentException(String.format("The start date %s should be after the end date %s",
+                    startDate, endDate));
     }
 
     public LocalDate startDate() {
@@ -48,11 +54,5 @@ public class DateRange {
         int result = startDate.hashCode();
         result = 31 * result + endDate.hashCode();
         return result;
-    }
-
-    private static void checkDates(LocalDate startDate, LocalDate endDate) {
-        if (endDate.isBefore(startDate) || startDate.equals(endDate))
-            throw new IllegalArgumentException(String.format("The start date %s should be after the end date %s",
-                    startDate, endDate));
     }
 }

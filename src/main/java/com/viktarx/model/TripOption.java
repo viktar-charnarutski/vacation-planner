@@ -4,7 +4,7 @@ import java.net.URL;
 import java.time.LocalDate;
 
 /**
- * Trip option class.
+ * The class contains information of a trip.
  */
 public class TripOption {
 
@@ -14,9 +14,7 @@ public class TripOption {
     private final URL url;
 
     public TripOption(LocalDate startDate, LocalDate endDate, double priceInDollars, URL url) {
-
         checkArguments(startDate, endDate, priceInDollars, url);
-
         this.startDate = startDate;
         this.endDate = endDate;
         this.priceInDollars = priceInDollars;
@@ -45,9 +43,10 @@ public class TripOption {
         checkUrl(url);
     }
 
-    private void checkUrl(URL url) {
-        if (url == null)
-            throw new IllegalArgumentException(String.format("Wrong URL was provided: %s", url));
+    private void checkDates(LocalDate startDate, LocalDate endDate) {
+        if (endDate.isBefore(startDate) || startDate.equals(endDate))
+            throw new IllegalArgumentException(String.format("The start date %s should be after the end date %s",
+                    startDate, endDate));
     }
 
     private void checkPrice(double price) {
@@ -55,10 +54,9 @@ public class TripOption {
             throw new IllegalArgumentException(String.format("Price %s could not be negative", price));
     }
 
-    private void checkDates(LocalDate startDate, LocalDate endDate) {
-        if (endDate.isBefore(startDate) || startDate.equals(endDate))
-            throw new IllegalArgumentException(String.format("The start date %s should be after the end date %s",
-                    startDate, endDate));
+    private void checkUrl(URL url) {
+        if (url == null)
+            throw new IllegalArgumentException(String.format("Wrong URL was provided: %s", url));
     }
 
     @Override
