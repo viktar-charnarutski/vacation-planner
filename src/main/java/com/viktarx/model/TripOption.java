@@ -1,25 +1,26 @@
 package com.viktarx.model;
 
+import java.net.URL;
 import java.time.LocalDate;
 
 /**
- *
+ * Trip option class.
  */
 public class TripOption {
 
     private final LocalDate startDate;
     private final LocalDate endDate;
     private final double priceInDollars;
-    private final String webLink;
+    private final URL url;
 
-    public TripOption(LocalDate startDate, LocalDate endDate, double priceInDollars, String webLink) {
+    public TripOption(LocalDate startDate, LocalDate endDate, double priceInDollars, URL url) {
 
-        checkArguments(startDate, endDate, priceInDollars, webLink);
+        checkArguments(startDate, endDate, priceInDollars, url);
 
         this.startDate = startDate;
         this.endDate = endDate;
         this.priceInDollars = priceInDollars;
-        this.webLink = webLink;
+        this.url = url;
     }
 
     public LocalDate startDate() {
@@ -34,19 +35,19 @@ public class TripOption {
         return priceInDollars;
     }
 
-    public String webLink() {
-        return webLink;
+    public URL url() {
+        return url;
     }
 
-    private void checkArguments(LocalDate startDate, LocalDate endDate, double priceInDollars, String webLink) {
+    private void checkArguments(LocalDate startDate, LocalDate endDate, double priceInDollars, URL url) {
         checkDates(startDate, endDate);
         checkPrice(priceInDollars);
-        checkWebLink(webLink);
+        checkUrl(url);
     }
 
-    private void checkWebLink(String webLink) {
-        if (webLink == null || webLink.length() < 10)
-            throw new IllegalArgumentException(String.format("Wrong web link was provided: %s", webLink));
+    private void checkUrl(URL url) {
+        if (url == null)
+            throw new IllegalArgumentException(String.format("Wrong URL was provided: %s", url));
     }
 
     private void checkPrice(double price) {
@@ -55,7 +56,7 @@ public class TripOption {
     }
 
     private void checkDates(LocalDate startDate, LocalDate endDate) {
-        if (startDate.isBefore(endDate) || startDate.equals(endDate))
+        if (endDate.isBefore(startDate) || startDate.equals(endDate))
             throw new IllegalArgumentException(String.format("The start date %s should be after the end date %s",
                     startDate, endDate));
     }
@@ -67,11 +68,21 @@ public class TripOption {
 
         TripOption that = (TripOption) o;
 
-        return webLink.equals(that.webLink);
+        if (Double.compare(that.priceInDollars, priceInDollars) != 0) return false;
+        if (!startDate.equals(that.startDate)) return false;
+        if (!endDate.equals(that.endDate)) return false;
+        return url.equals(that.url);
     }
 
     @Override
     public int hashCode() {
-        return webLink.hashCode();
+        int result;
+        long temp;
+        result = startDate.hashCode();
+        result = 31 * result + endDate.hashCode();
+        temp = Double.doubleToLongBits(priceInDollars);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + url.hashCode();
+        return result;
     }
 }
