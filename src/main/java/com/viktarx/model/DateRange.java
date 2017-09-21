@@ -29,7 +29,7 @@ public class DateRange {
     }
 
     public int duration() {
-        return Period.between(endDate, startDate).getDays();
+        return Period.between(startDate, endDate).getDays();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class DateRange {
     }
 
     private static void checkDates(LocalDate startDate, LocalDate endDate) {
-        if (startDate.isBefore(endDate) || startDate.equals(endDate))
+        if (endDate.isBefore(startDate) || startDate.equals(endDate))
             throw new IllegalArgumentException(String.format("The start date %s should be after the end date %s",
                     startDate, endDate));
     }
