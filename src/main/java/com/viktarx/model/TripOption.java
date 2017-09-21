@@ -50,7 +50,7 @@ public class TripOption {
     }
 
     private void checkPrice(double price) {
-        if (price > 0)
+        if (price < 0)
             throw new IllegalArgumentException(String.format("Price %s could not be negative", price));
     }
 
