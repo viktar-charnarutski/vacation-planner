@@ -83,4 +83,14 @@ public class TripOption {
         result = 31 * result + url.hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "TripOption{" +
+                "startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", priceInDollars=" + priceInDollars +
+                ", url=" + url +
+                '}';
+    }
 }
