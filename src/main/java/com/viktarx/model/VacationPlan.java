@@ -5,7 +5,7 @@ import java.time.Period;
 import java.util.*;
 
 /**
- *
+ * The class contains information about vacation's plan.
  */
 public class VacationPlan {
 
@@ -15,13 +15,11 @@ public class VacationPlan {
     private final String departureCity;
     private final String destinationCity;
 
-    private final Set<DateRange> dateRanges = new HashSet<>();
+    private final Set<DateRange> optionsForDateRanges = new HashSet<>();
 
     public VacationPlan(LocalDate possibleStartDate, LocalDate possibleEndDate, int minDurationInDays, String departureCity,
                         String destinationCity) {
-
         checkArguments(possibleStartDate, possibleEndDate, minDurationInDays, departureCity, destinationCity);
-
         this.possibleStartDate = possibleStartDate;
         this.possibleEndDate = possibleEndDate;
         this.minDurationInDays = minDurationInDays;
@@ -49,30 +47,19 @@ public class VacationPlan {
         return destinationCity;
     }
 
-    public Set<DateRange> dateRanges() {
-        if (dateRanges.size() == 0) calculateDateRanges();
-        return dateRanges;
+    public final Set<DateRange> optionsForDateRanges() {
+        if (optionsForDateRanges.size() == 0) calculateOptionsForDateRanges();
+        return optionsForDateRanges;
     }
 
-    private void calculateDateRanges() {
-        populateStartDates();
-        populateEndDates();
+    private void calculateOptionsForDateRanges() {
+        for (int firstDay = 0; firstDay <= maxPossibleDurationInDays(); firstDay++)
+            for (int lastDay = firstDay + minDurationInDays; lastDay <= maxPossibleDurationInDays(); lastDay++)
+                optionsForDateRanges.add(new DateRange(possibleStartDate.plusDays(firstDay), possibleStartDate.plusDays(lastDay)));
     }
 
-    private void populateStartDates() {
-        for (int i = 0; i <= (maxDurationInDays() - minDurationInDays); i++) {
-            dateRanges.add(new DateRange(possibleStartDate.plusDays(i), possibleEndDate));
-        }
-    }
-
-    private void populateEndDates() {
-        for (int i = minDurationInDays; i <= maxDurationInDays(); i++) {
-            dateRanges.add(new DateRange(possibleStartDate, possibleStartDate.plusDays(i)));
-        }
-    }
-
-    private int maxDurationInDays() {
-        return Period.between(possibleEndDate, possibleStartDate).getDays();
+    private int maxPossibleDurationInDays() {
+        return Period.between(possibleStartDate, possibleEndDate).getDays();
     }
 
     private void checkArguments(LocalDate possibleStartDate, LocalDate possibleEndDate, int minLongevityInDays, String departureCity,
@@ -95,16 +82,54 @@ public class VacationPlan {
     private void checkMinDurationInDays(int minDurationInDays, LocalDate possibleStartDate, LocalDate possibleEndDate) {
         if (!minDurationFitsDateRange(minDurationInDays, possibleStartDate, possibleEndDate))
             throw new IllegalArgumentException(String.format("Minimum duration in days %d should be less than end date %s and start date %s difference",
-                    minDurationInDays, possibleEndDate, possibleStartDate));
+                    minDurationInDays, possibleStartDate, possibleEndDate));
     }
 
     private boolean minDurationFitsDateRange(int longevityInDays, LocalDate possibleStartDate, LocalDate possibleEndDate) {
-        return Period.between(possibleEndDate, possibleStartDate).getDays() > longevityInDays;
+        return Period.between(possibleStartDate, possibleEndDate).getDays() > longevityInDays;
     }
 
     private void checkDates(LocalDate possibleStartDate, LocalDate possibleEndDate) {
-        if (possibleStartDate.isBefore(possibleEndDate) || possibleStartDate.equals(possibleEndDate))
+        if (possibleEndDate.isBefore(possibleStartDate) || possibleStartDate.equals(possibleEndDate))
             throw new IllegalArgumentException(String.format("The start date %s should be after the end date %s",
                     possibleStartDate, possibleEndDate));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof VacationPlan)) return false;
+
+        VacationPlan that = (VacationPlan) o;
+
+        if (minDurationInDays != that.minDurationInDays) return false;
+        if (possibleStartDate != null ? !possibleStartDate.equals(that.possibleStartDate) : that.possibleStartDate != null)
+            return false;
+        if (possibleEndDate != null ? !possibleEndDate.equals(that.possibleEndDate) : that.possibleEndDate != null)
+            return false;
+        if (departureCity != null ? !departureCity.equals(that.departureCity) : that.departureCity != null)
+            return false;
+        return destinationCity != null ? destinationCity.equals(that.destinationCity) : that.destinationCity == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = possibleStartDate != null ? possibleStartDate.hashCode() : 0;
+        result = 31 * result + (possibleEndDate != null ? possibleEndDate.hashCode() : 0);
+        result = 31 * result + minDurationInDays;
+        result = 31 * result + (departureCity != null ? departureCity.hashCode() : 0);
+        result = 31 * result + (destinationCity != null ? destinationCity.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "VacationPlan{" +
+                "possibleStartDate=" + possibleStartDate +
+                ", possibleEndDate=" + possibleEndDate +
+                ", minDurationInDays=" + minDurationInDays +
+                ", departureCity='" + departureCity + '\'' +
+                ", destinationCity='" + destinationCity + '\'' +
+                '}';
     }
 }
