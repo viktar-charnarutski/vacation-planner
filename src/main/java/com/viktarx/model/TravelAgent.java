@@ -12,7 +12,7 @@ public class TravelAgent implements TravelResearch {
 
     public Set<TripOption> offerTripOptionsForVacationPlan(VacationPlan vacationPlan) {
         Set<TripOption> tripOptions = new HashSet<>();
-        for (DateRange dateRange : vacationPlan.dateRanges()) {
+        for (DateRange dateRange : vacationPlan.optionsForDateRanges()) {
             tripOptions.addAll(optionsAvailableForDates(vacationPlan.departureCity(), vacationPlan.destinationCity(),
                     dateRange.startDate(), dateRange.endDate()));
         }
