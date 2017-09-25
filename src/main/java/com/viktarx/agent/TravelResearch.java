@@ -1,4 +1,4 @@
-package com.viktarx.model;
+package com.viktarx.agent;
 
 import java.util.Set;
 
