@@ -1,11 +1,13 @@
 package com.viktarx.model;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
+ * The class represents a functionality of checking available trip offers proposed by a certain agents.
  */
 public class TravelAgent implements TravelResearch {
 
@@ -19,8 +21,15 @@ public class TravelAgent implements TravelResearch {
         return tripOptions;
     }
 
+    // TODO: a service implementation is pending
     private Set<TripOption> optionsAvailableForDates(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate) {
-        // TODO call third party service
-        return null;
+        Set<TripOption> tripOptions = new HashSet<>();
+        try {
+            tripOptions.add(new TripOption(LocalDate.now(), LocalDate.now().plusDays(5), 1099,
+                    new URL("https://www.example.com")));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return tripOptions;
     }
 }
