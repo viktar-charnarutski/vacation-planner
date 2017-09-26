@@ -15,7 +15,7 @@ public abstract class CrawlTripService implements TripService {
 
     @Override
     public Set<TripOption> tripOptions(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate) {
-        return parsedTripOptionsFromWebPageContent(responseForGet(urlParameters(departureCity, destinationCity, startDate, endDate)));
+        return parsedTripOptionsFromWebPageContent(responseForGetRequestWithParams(urlParameters(departureCity, destinationCity, startDate, endDate)));
     }
 
     abstract String urlParameters(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate);
@@ -24,29 +24,29 @@ public abstract class CrawlTripService implements TripService {
 
     abstract String serviceUrl();
 
-    private String responseForGet(String urlParameters) {
-        HttpURLConnection con;
+    private String responseForGetRequestWithParams(String urlParameters) {
+        HttpURLConnection connection;
         StringBuilder response = new StringBuilder();
         try {
             URL targetUrl = new URL(serviceUrl() + urlParameters);
-            con = (HttpURLConnection) targetUrl.openConnection();
-            con.setRequestMethod("GET");
-            con.setRequestProperty("User-Agent", "Mozilla/5.0");
-            int responseCode = con.getResponseCode();
+            connection = (HttpURLConnection) targetUrl.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
+            int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
-
-                while ((inputLine = in.readLine()) != null) {
+                while ((inputLine = bufferedReader.readLine()) != null) {
                     response.append(inputLine);
                 }
-                in.close();
+                bufferedReader.close();
             } else {
                 throw new IllegalStateException(String.format("Failed to get response from %s. Response code: %d",
                         serviceUrl(), responseCode));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IllegalStateException(String.format("Failed to communicate with %s due to: %s",
+                    serviceUrl(), e.getCause()));
         }
         return response.toString();
     }
