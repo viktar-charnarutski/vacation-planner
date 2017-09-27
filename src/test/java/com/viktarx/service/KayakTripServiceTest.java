@@ -9,9 +9,9 @@ import java.util.Set;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Tests for the ExpediaTripService class.
+ * Tests for the KayakTripService class.
  */
-public class ExpediaTripServiceTest {
+public class KayakTripServiceTest {
     @Test
     public void urlParameters() throws Exception {
     }
@@ -26,7 +26,7 @@ public class ExpediaTripServiceTest {
 
     @Test
     public void tripOptions() throws Exception {
-        TripService service = new ExpediaTripService();
+        TripService service = new KayakTripService();
         Set<TripOption> tripOptions = service.tripOptions("San Francisco, CA", "New York, NY", LocalDate.now().plusDays(5), LocalDate.now().plusDays(7));
         assertTrue(tripOptions != null && !tripOptions.isEmpty());
     }
