@@ -21,7 +21,7 @@ public class KayakTripService extends CrawlTripService {
 
     @Override
     String rawDataFor(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MMM-dd");
         String initResponse = responseForGetWithParams(paramsForGet(departureCity, destinationCity, startDate.format(formatter), endDate.format(formatter)));
         String urlParameters = parsedSearchId(initResponse);
         return responseForPostWithParams(paramsForPost(urlParameters));
