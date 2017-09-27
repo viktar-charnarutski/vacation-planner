@@ -1,0 +1,59 @@
+package com.viktarx.service;
+
+import com.viktarx.agent.TripOption;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * Crawling service implementation for the Kayak provider.
+ */
+public class KayakTripService extends CrawlTripService {
+
+    @Override
+    String serviceUrl() {
+        return "https://www.kayak.com";
+    }
+
+    @Override
+    String rawDataFor(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD");
+        String initResponse = responseForGetWithParams(paramsForGet(departureCity, destinationCity, startDate.format(formatter), endDate.format(formatter)));
+        String urlParameters = parsedSearchId(initResponse);
+        return responseForPostWithParams(paramsForPost(urlParameters));
+    }
+
+    private String parsedSearchId(String rawPageContent) {
+        return "vtAsDFWpHp";
+    }
+
+    @Override
+    String paramsForGet(String... params) {
+        return "/packages/Jamaica-U119/2017-10-10/2017-10-17/-1,-1/2/0,0,0/SFO";
+    }
+
+    @Override
+    String paramsForPost(String... params) {
+        return "searchId=vtAsDFWpHp&poll=true&pollNumber=0&applyFilters=true&filterState=&useViewStateFilterState=true&pageNumber=1&append=false&sortMode=rank&ascending=true&priceType=totaltaxes&requestReason=POLL&isSecondPhase=false&textAdPageLocations=bottom%2Cright&displayAdPageLocations=upper-right%2Cright&existingAds=false&ajaxts=1506481172251&scriptsMetadata=6D1f1E5CmDIIQQ2I1r1IDNHvgDwVR1uUFX1o1I1MxHuQj1%26QBBDOMa33I1C27B19B23oCSc1Pw%3D%3D&stylesMetadata=10gOG34QI1I14BQ10H1*e%26MDB1DgTgQUO%25QD1Cg1YEI1g1t1gMEBQBUN75C35ZILw2I1O64g1%3D%3D";
+    }
+
+    @Override
+    Set<TripOption> parsedTripOptionsFromRawResponse(String response) {
+        System.out.println(response);
+        Set<TripOption> tripOptions = new HashSet<>();
+        try {
+            TripOption tripOption = new TripOption(LocalDate.now(), LocalDate.now().plusDays(5), 1099,
+                    new URL("https://www.example.com"));
+            tripOptions.add(tripOption);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return tripOptions;
+    }
+
+
+}
