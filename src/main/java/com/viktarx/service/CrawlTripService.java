@@ -13,6 +13,8 @@ import java.util.Set;
  */
 public abstract class CrawlTripService implements TripService {
 
+    private static final String USER_AGENT = "Mozilla/5.0";
+
     @Override
     public Set<TripOption> tripOptions(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate) {
         return parsedTripOptionsFromRawResponse(rawDataFor(departureCity, destinationCity, startDate, endDate));
@@ -30,24 +32,13 @@ public abstract class CrawlTripService implements TripService {
 
     String responseForGetWithParams(String urlParameters) {
         HttpURLConnection connection;
-        StringBuilder response = new StringBuilder();
+        StringBuilder response;
         try {
             URL targetUrl = new URL(serviceUrl() + urlParameters);
             connection = (HttpURLConnection) targetUrl.openConnection();
             connection.setRequestMethod("GET");
-            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String inputLine;
-                while ((inputLine = bufferedReader.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                bufferedReader.close();
-            } else {
-                throw new IllegalStateException(String.format("Failed to get response from %s. Response code: %d",
-                        serviceUrl(), responseCode));
-            }
+            connection.setRequestProperty("User-Agent", USER_AGENT);
+            response = parsedResponse(connection);
         } catch (IOException e) {
             throw new IllegalStateException(String.format("Failed to communicate with %s due to: %s",
                     serviceUrl(), e.getCause()));
@@ -55,31 +46,43 @@ public abstract class CrawlTripService implements TripService {
         return response.toString();
     }
 
-    // TODO adjust post call
     String responseForPostWithParams(String urlParameters) {
         HttpURLConnection connection;
-        StringBuilder response = new StringBuilder();
+        StringBuilder response;
         try {
-            URL targetUrl = new URL(serviceUrl());
-            connection = (HttpURLConnection) targetUrl.openConnection();
+            URL obj = new URL(serviceUrl());
+            connection = (HttpURLConnection) obj.openConnection();
             connection.setRequestMethod("POST");
-            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String inputLine;
-                while ((inputLine = bufferedReader.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                bufferedReader.close();
-            } else {
-                throw new IllegalStateException(String.format("Failed to get response from %s. Response code: %d",
-                        serviceUrl(), responseCode));
-            }
-        } catch (IOException e) {
+            connection.setRequestProperty("User-Agent", USER_AGENT);
+
+            connection.setDoOutput(true);
+            OutputStream os = connection.getOutputStream();
+            os.write(urlParameters.getBytes());
+            os.flush();
+            os.close();
+
+            response = parsedResponse(connection);
+        }  catch (IOException e) {
             throw new IllegalStateException(String.format("Failed to communicate with %s due to: %s",
                     serviceUrl(), e.getCause()));
         }
         return response.toString();
+    }
+
+    private StringBuilder parsedResponse(HttpURLConnection connection) throws IOException {
+        StringBuilder response = new StringBuilder();
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+        } else {
+            throw new IllegalStateException(String.format("Failed to get response from %s. Response code: %d",
+                    serviceUrl(), responseCode));
+        }
+        return response;
     }
 }
