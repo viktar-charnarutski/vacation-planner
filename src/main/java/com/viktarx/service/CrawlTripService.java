@@ -15,22 +15,54 @@ public abstract class CrawlTripService implements TripService {
 
     @Override
     public Set<TripOption> tripOptions(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate) {
-        return parsedTripOptionsFromWebPageContent(responseForGetRequestWithParams(urlParameters(departureCity, destinationCity, startDate, endDate)));
+        return parsedTripOptionsFromRawResponse(rawDataFor(departureCity, destinationCity, startDate, endDate));
     }
 
-    abstract String urlParameters(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate);
+    abstract String rawDataFor(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate);
 
-    abstract Set<TripOption> parsedTripOptionsFromWebPageContent(String webPageContent);
+    abstract String paramsForGet(String... params);
+
+    abstract String paramsForPost(String... params);
+
+    abstract Set<TripOption> parsedTripOptionsFromRawResponse(String response);
 
     abstract String serviceUrl();
 
-    private String responseForGetRequestWithParams(String urlParameters) {
+    String responseForGetWithParams(String urlParameters) {
         HttpURLConnection connection;
         StringBuilder response = new StringBuilder();
         try {
             URL targetUrl = new URL(serviceUrl() + urlParameters);
             connection = (HttpURLConnection) targetUrl.openConnection();
             connection.setRequestMethod("GET");
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                while ((inputLine = bufferedReader.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                bufferedReader.close();
+            } else {
+                throw new IllegalStateException(String.format("Failed to get response from %s. Response code: %d",
+                        serviceUrl(), responseCode));
+            }
+        } catch (IOException e) {
+            throw new IllegalStateException(String.format("Failed to communicate with %s due to: %s",
+                    serviceUrl(), e.getCause()));
+        }
+        return response.toString();
+    }
+
+    // TODO adjust post call
+    String responseForPostWithParams(String urlParameters) {
+        HttpURLConnection connection;
+        StringBuilder response = new StringBuilder();
+        try {
+            URL targetUrl = new URL(serviceUrl());
+            connection = (HttpURLConnection) targetUrl.openConnection();
+            connection.setRequestMethod("POST");
             connection.setRequestProperty("User-Agent", "Mozilla/5.0");
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
