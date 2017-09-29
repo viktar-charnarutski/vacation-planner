@@ -4,6 +4,7 @@ import com.viktarx.agent.TripOption;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.Assert.assertTrue;
@@ -31,4 +32,10 @@ public class KayakTripServiceTest {
         assertTrue(tripOptions != null && !tripOptions.isEmpty());
     }
 
+    @Test
+    public void searchIdFromRawPageContext() throws Exception {
+        KayakTripService service = new KayakTripService();
+        Optional<String> searchIdOpt = service.parsedSearchIdFromRawPageContext("{\"searchId\":\"vpAsApjvuh\"}");
+        assertTrue(searchIdOpt.isPresent() && searchIdOpt.get().equals("searchId=vpAsApjvuh"));
+    }
 }
