@@ -6,6 +6,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 /**
@@ -84,5 +85,9 @@ public abstract class CrawlTripService implements TripService {
                     serviceUrl(), responseCode));
         }
         return response;
+    }
+
+    DateTimeFormatter searchDateFormatter() {
+        return DateTimeFormatter.ofPattern("uuuu-MMM-dd");
     }
 }
