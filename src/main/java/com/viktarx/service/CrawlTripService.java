@@ -25,8 +25,6 @@ public abstract class CrawlTripService implements TripService {
 
     abstract String paramsForGet(String... params);
 
-    abstract String paramsForPost(String... params);
-
     abstract Set<TripOption> parsedTripOptionsFromRawResponse(String response);
 
     abstract String serviceUrl();
@@ -89,5 +87,14 @@ public abstract class CrawlTripService implements TripService {
 
     DateTimeFormatter searchDateFormatter() {
         return DateTimeFormatter.ofPattern("uuuu-MMM-dd");
+    }
+
+    String paramsForPost(String... params) {
+        StringBuilder mergedParams = new StringBuilder("");
+        if (params.length > 0) {
+            mergedParams = new StringBuilder(params[0]);
+            for (int i = 1; i < params.length; i++) mergedParams.append("&").append(i++);
+        }
+        return mergedParams.toString();
     }
 }

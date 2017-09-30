@@ -46,11 +46,6 @@ public class KayakTripService extends CrawlTripService {
     }
 
     @Override
-    String paramsForPost(String... params) {
-        return params[0] + "&poll=true&pollNumber=0&applyFilters=true&filterState=&useViewStateFilterState=true&pageNumber=1&append=false&sortMode=rank&ascending=true&priceType=totaltaxes&requestReason=POLL&isSecondPhase=false&textAdPageLocations=bottom%2Cright&displayAdPageLocations=upper-right%2Cright&existingAds=false&ajaxts=1506481172251&scriptsMetadata=6D1f1E5CmDIIQQ2I1r1IDNHvgDwVR1uUFX1o1I1MxHuQj1%26QBBDOMa33I1C27B19B23oCSc1Pw%3D%3D&stylesMetadata=10gOG34QI1I14BQ10H1*e%26MDB1DgTgQUO%25QD1Cg1YEI1g1t1gMEBQBUN75C35ZILw2I1O64g1%3D%3D";
-    }
-
-    @Override
     Set<TripOption> parsedTripOptionsFromRawResponse(String response) {
         System.out.println(response);
         Set<TripOption> tripOptions = new HashSet<>();
