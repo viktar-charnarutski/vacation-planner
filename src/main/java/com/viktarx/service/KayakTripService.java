@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 /**
  * Crawling service implementation for the Kayak provider.
  */
-public class KayakTripService extends CrawlTripService {
+class KayakTripService extends CrawlTripService {
 
     @Override
     String serviceUrl() {

@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * Structure implementation of a crawling service.
  */
-public abstract class CrawlTripService implements TripService {
+abstract class CrawlTripService implements TripService {
 
     private static final String USER_AGENT = "Mozilla/5.0";
 

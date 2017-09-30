@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Trip service's functionality description.
  */
-public interface TripService {
+interface TripService {
 
     Set<TripOption> tripOptions(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate);
 
