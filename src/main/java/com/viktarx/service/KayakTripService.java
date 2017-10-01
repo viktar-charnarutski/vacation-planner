@@ -5,7 +5,6 @@ import com.viktarx.agent.TripOption;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -24,10 +23,23 @@ class KayakTripService extends CrawlTripService {
 
     @Override
     String rawDataFor(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate) {
-        String initResponse = responseForGetWithParams(
-                paramsForGet(departureCity, destinationCity, startDate.format(searchDateFormatter()), endDate.format(searchDateFormatter())));
+        String kayakCustomParamsForGet = kayakCustomParamsForGet(departureCity, destinationCity, startDate, endDate);
+        String initResponse = responseForGetWithParams(kayakCustomParamsForGet);
+
         String urlParameters = parsedSearchIdFromRawPageContext(initResponse).orElse("");
         return responseForPostWithParams(paramsForPost(urlParameters));
+    }
+
+    // TODO make sure that passed departure / destination values are unified, e.g. Jamaica-U119, SFO
+    private String kayakCustomParamsForGet(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate) {
+        return "/packages/" +
+                destinationCity +
+                "/" +
+                startDate.format(searchDateFormatter()) +
+                "/" +
+                endDate.format(searchDateFormatter()) +
+                "/-1,-1/2/0,0,0/" +
+                departureCity;
     }
 
     Optional<String> parsedSearchIdFromRawPageContext(String rawPageContent) {
@@ -41,13 +53,7 @@ class KayakTripService extends CrawlTripService {
     }
 
     @Override
-    String paramsForGet(String... params) {
-        return "/packages/Jamaica-U119/2017-10-10/2017-10-17/-1,-1/2/0,0,0/SFO";
-    }
-
-    @Override
     Set<TripOption> parsedTripOptionsFromRawResponse(String response) {
-        System.out.println(response);
         Set<TripOption> tripOptions = new HashSet<>();
         try {
             TripOption tripOption = new TripOption(LocalDate.now(), LocalDate.now().plusDays(5), 1099,
@@ -58,6 +64,5 @@ class KayakTripService extends CrawlTripService {
         }
         return tripOptions;
     }
-
 
 }
