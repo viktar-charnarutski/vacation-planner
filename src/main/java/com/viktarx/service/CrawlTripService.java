@@ -90,7 +90,7 @@ abstract class CrawlTripService implements TripService {
     }
 
     String paramsForPost(String... params) {
-        StringBuilder mergedParams = new StringBuilder("");
+        StringBuilder mergedParams = new StringBuilder();
         if (params.length > 0) {
             mergedParams = new StringBuilder(params[0]);
             for (int i = 1; i < params.length; i++) mergedParams.append("&").append(params[i]);
