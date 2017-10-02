@@ -14,8 +14,6 @@ import java.util.Set;
  */
 abstract class CrawlTripService implements TripService {
 
-    private static final String USER_AGENT = "Mozilla/5.0";
-
     @Override
     public Set<TripOption> tripOptions(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate) {
         return parsedTripOptionsFromRawResponse(rawDataFor(departureCity, destinationCity, startDate, endDate));
@@ -36,7 +34,7 @@ abstract class CrawlTripService implements TripService {
             URL targetUrl = new URL(serviceUrl() + urlParameters);
             connection = (HttpURLConnection) targetUrl.openConnection();
             connection.setRequestMethod("GET");
-            connection.setRequestProperty("User-Agent", USER_AGENT);
+            connection.setRequestProperty("User-Agent", userAgent());
             response = parsedResponse(connection);
         } catch (IOException e) {
             throw new IllegalStateException(String.format("Failed to communicate with %s due to: %s",
@@ -52,7 +50,7 @@ abstract class CrawlTripService implements TripService {
             URL obj = new URL(serviceUrl());
             connection = (HttpURLConnection) obj.openConnection();
             connection.setRequestMethod("POST");
-            connection.setRequestProperty("User-Agent", USER_AGENT);
+            connection.setRequestProperty("User-Agent", userAgent());
 
             connection.setDoOutput(true);
             OutputStream os = connection.getOutputStream();
@@ -96,5 +94,9 @@ abstract class CrawlTripService implements TripService {
             for (int i = 1; i < params.length; i++) mergedParams.append("&").append(params[i]);
         }
         return mergedParams.toString();
+    }
+
+    String userAgent() {
+        return "Mozilla/5.0";
     }
 }
