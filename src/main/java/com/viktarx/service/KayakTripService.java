@@ -23,7 +23,7 @@ class KayakTripService extends CrawlTripService {
 
     @Override
     String rawDataFor(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate) {
-        String kayakCustomParamsForGet = kayakCustomParamsForGet(departureCity, destinationCity, startDate, endDate);
+        String kayakCustomParamsForGet = paramsForGet(departureCity, destinationCity, startDate, endDate);
         String initResponse = responseForGetWithParams(kayakCustomParamsForGet);
 
         String urlParameters = parsedSearchIdFromRawPageContext(initResponse).orElse("");
@@ -31,7 +31,8 @@ class KayakTripService extends CrawlTripService {
     }
 
     // TODO make sure that passed departure / destination values are unified, e.g. Jamaica-U119, SFO
-    private String kayakCustomParamsForGet(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate) {
+    @Override
+    String paramsForGet(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate) {
         return "/packages/" +
                 destinationCity +
                 "/" +
