@@ -27,6 +27,8 @@ abstract class CrawlTripService implements TripService {
 
     abstract String serviceUrl();
 
+    abstract String paramsForGet (String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate);
+
     String responseForGetWithParams(String urlParameters) {
         HttpURLConnection connection;
         StringBuilder response;
@@ -92,14 +94,6 @@ abstract class CrawlTripService implements TripService {
         if (params.length > 0) {
             mergedParams = new StringBuilder(params[0]);
             for (int i = 1; i < params.length; i++) mergedParams.append("&").append(params[i]);
-        }
-        return mergedParams.toString();
-    }
-
-    String paramsForGet(String... params) {
-        StringBuilder mergedParams = new StringBuilder();
-        if (params.length > 0) {
-            for (String param : params) mergedParams.append("/").append(param);
         }
         return mergedParams.toString();
     }
