@@ -22,6 +22,11 @@ class KayakTripService extends CrawlTripService {
     }
 
     @Override
+    String postUri() {
+        return "/s/horizon/packages/results/PackageSearchPoll";
+    }
+
+    @Override
     String rawDataFor(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate) {
         String kayakCustomParamsForGet = paramsForGet(departureCity, destinationCity, startDate, endDate);
         String initResponse = responseForGetWithParams(kayakCustomParamsForGet);
