@@ -26,8 +26,8 @@ class KayakTripService extends CrawlTripService {
         String kayakCustomParamsForGet = paramsForGet(departureCity, destinationCity, startDate, endDate);
         String initResponse = responseForGetWithParams(kayakCustomParamsForGet);
 
-        String urlParameters = parsedSearchIdFromRawPageContext(initResponse).orElse("");
-        return responseForPostWithParams(paramsForPost(urlParameters));
+        String searchIdParam = parsedSearchIdFromRawPageContext(initResponse).orElse("");
+        return responseForPostWithParams(paramsForPost(searchIdParam));
     }
 
     // TODO make sure that passed departure / destination values are unified, e.g. Jamaica-U119, SFO
