@@ -25,6 +25,8 @@ abstract class CrawlTripService implements TripService {
 
     abstract String serviceUrl();
 
+    abstract String postUri();
+
     abstract String paramsForGet (String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate);
 
     String responseForGetWithParams(String urlParameters) {
@@ -47,7 +49,7 @@ abstract class CrawlTripService implements TripService {
         HttpURLConnection connection;
         StringBuilder response;
         try {
-            URL obj = new URL(serviceUrl());
+            URL obj = new URL(serviceUrl() + postUri());
             connection = (HttpURLConnection) obj.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("User-Agent", userAgent());
