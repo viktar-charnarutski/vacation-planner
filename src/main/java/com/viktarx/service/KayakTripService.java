@@ -48,6 +48,11 @@ class KayakTripService extends CrawlTripService {
                 departureCity;
     }
 
+    @Override
+    String paramsForPost(String... params) {
+        return params[0] + "&poll=true&pollNumber=1&applyFilters=true&filterState=&useViewStateFilterState=true&pageNumber=1&append=false&sortMode=rank&ascending=true&priceType=totaltaxes&lastPollTotalCount=641&requestReason=POLL&isSecondPhase=false&ajaxts=1507086724124&scriptsMetadata=6D1fQE5U1BDDiE3Be1QBv%3Bs1fCGYB*QZdCQ1i1D1f*SI1hwMEMYxr34BQ26C21EE19I1B1FTUBe1H&stylesMetadata=10gPG35EC1C13C1V10D%26cvYGBwg1gDsJKHboBgBQ1MCE3Xg1CD1%26QqGg75C1g26Dg1w3I1MoG%262E1H64Q1%3D%3D";
+    }
+
     Optional<String> parsedSearchIdFromRawPageContext(String rawPageContent) {
         Optional<String> result = Optional.empty();
         Pattern pattern = Pattern.compile("(\\{\"searchId\":\"+)(\\w+)(\"})");
