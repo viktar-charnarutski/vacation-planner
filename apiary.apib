@@ -14,6 +14,7 @@ Travel agent with trips options.
         [
             {
                 "id": "01",
+                "departure": "SFO",
                 "destination": "MBJ",
                 "start_date": "2017-10-15T15:00:00.000Z",
                 "end_date": "2017-10-20T15:00:00.000Z",
@@ -27,6 +28,7 @@ Travel agent with trips options.
             },
             {
                 "id": "02",
+                "departure": "SFO",
                 "destination": "MBJ",
                 "start_date": "2017-10-15T20:00:00.000Z",
                 "end_date": "2017-10-20T25:00:00.000Z",
@@ -40,6 +42,7 @@ Travel agent with trips options.
             },
             {
                 "id": "03",
+                "departure": "SFO",
                 "destination": "MBJ",
                 "start_date": "2017-10-15T25:00:00.000Z",
                 "end_date": "2017-10-20T30:00:00.000Z",
@@ -53,9 +56,10 @@ Travel agent with trips options.
             }
         ]
 
-## Get trip options [/trips/{?destination,start,end}]
+## Get trip options [/trips/{?departure,destination,start,end}]
 
 + Parameters
+    + departure - departure of the trip
     + destination - trip's destination
     + start (date) - vacation start date
     + end (date)- vacation end date
@@ -67,6 +71,7 @@ Travel agent with trips options.
         [
             {
                 "id": "01",
+                "departure": "SFO",
                 "destination": "MBJ",
                 "start_date": "2017-10-15T15:00:00.000Z",
                 "end_date": "2017-10-20T15:00:00.000Z",
@@ -75,11 +80,12 @@ Travel agent with trips options.
                 "hotel":
                         "name": "Tower Isle",
                         "type": "All Inclusive",
-                        "rating": 4.8
+                        "raiting": 4.8
                     }
             },
             {
                 "id": "02",
+                "departure": "SFO",
                 "destination": "MBJ",
                 "start_date": "2017-10-15T20:00:00.000Z",
                 "end_date": "2017-10-20T25:00:00.000Z",
@@ -88,11 +94,12 @@ Travel agent with trips options.
                 "hotel":
                         "name": "San Souci",
                         "type": "All Inclusive VIP",
-                        "rating": 5.0
+                        "raiting": 5.0
                     }
             },
             {
                 "id": "03",
+                "departure": "SFO",
                 "destination": "MBJ",
                 "start_date": "2017-10-15T25:00:00.000Z",
                 "end_date": "2017-10-20T30:00:00.000Z",
@@ -101,7 +108,7 @@ Travel agent with trips options.
                 "hotel":
                         "name": "Sandals",
                         "type": "All Inclusive",
-                        "rating": 4.9
+                        "raiting": 4.9
                     }
             }
         ]
