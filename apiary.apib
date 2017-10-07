@@ -3,78 +3,105 @@ HOST: http://polls.apiblueprint.org/
 
 # traveler
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Travel agent with trips options.
 
-## Questions Collection [/questions]
+## Trips Collection [/trips]
 
-### List All Questions [GET]
+### List All Trips [GET]
 
 + Response 200 (application/json)
 
         [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
+                "id": "01",
+                "destination": "MBJ",
+                "start_date": "2017-10-15T15:00:00.000Z",
+                "end_date": "2017-10-20T15:00:00.000Z",
+                "price_usd": 2999,
+                "url": "https://www.example.com/01",
+                "hotel":
+                        "name": "Tower Isle",
+                        "type": "All Inclusive",
+                        "raiting": 4.8
                     }
-                ]
+            },
+            {
+                "id": "02",
+                "destination": "MBJ",
+                "start_date": "2017-10-15T20:00:00.000Z",
+                "end_date": "2017-10-20T25:00:00.000Z",
+                "price_usd": 5999,
+                "url": "https://www.example.com/02",
+                "hotel":
+                        "name": "San Souci",
+                        "type": "All Inclusive VIP",
+                        "raiting": 5.0
+                    }
+            },
+            {
+                "id": "03",
+                "destination": "MBJ",
+                "start_date": "2017-10-15T25:00:00.000Z",
+                "end_date": "2017-10-20T30:00:00.000Z",
+                "price_usd": 3999,
+                "url": "https://www.example.com/03",
+                "hotel":
+                        "name": "Sandals",
+                        "type": "All Inclusive",
+                        "raiting": 4.9
+                    }
             }
         ]
 
-### Create a New Question [POST]
+## Get trip options [/trips/{?destination,start,end}]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
++ Parameters
+    + destination - trip's destination
+    + start (date) - vacation start date
+    + end (date)- vacation end date
 
-+ Request (application/json)
+### Get a trip option for passed parameters [GET]
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
++ Response 200 (application/json)
 
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /questions/2
-
-    + Body
-
+        [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
+                "id": "01",
+                "destination": "MBJ",
+                "start_date": "2017-10-15T15:00:00.000Z",
+                "end_date": "2017-10-20T15:00:00.000Z",
+                "price_usd": 2999,
+                "url": "https://www.example.com/01",
+                "hotel":
+                        "name": "Tower Isle",
+                        "type": "All Inclusive",
+                        "raiting": 4.8
                     }
-                ]
+            },
+            {
+                "id": "02",
+                "destination": "MBJ",
+                "start_date": "2017-10-15T20:00:00.000Z",
+                "end_date": "2017-10-20T25:00:00.000Z",
+                "price_usd": 5999,
+                "url": "https://www.example.com/02",
+                "hotel":
+                        "name": "San Souci",
+                        "type": "All Inclusive VIP",
+                        "raiting": 5.0
+                    }
+            },
+            {
+                "id": "03",
+                "destination": "MBJ",
+                "start_date": "2017-10-15T25:00:00.000Z",
+                "end_date": "2017-10-20T30:00:00.000Z",
+                "price_usd": 3999,
+                "url": "https://www.example.com/03",
+                "hotel":
+                        "name": "Sandals",
+                        "type": "All Inclusive",
+                        "raiting": 4.9
+                    }
             }
+        ]
