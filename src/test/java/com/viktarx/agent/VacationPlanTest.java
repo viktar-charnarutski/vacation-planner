@@ -15,37 +15,37 @@ public class VacationPlanTest {
     @Test
     public void possibleStartDate() throws Exception {
         assertEquals(LocalDate.now().plusDays(5), new VacationPlan(LocalDate.now().plusDays(5), LocalDate.now().plusDays(10), 2,
-                "San Francisco, CA", "New York, NY").possibleStartDate());
+                "SFO", "MBJ").possibleStartDate());
     }
 
     @Test
     public void possibleEndDate() throws Exception {
         assertEquals(LocalDate.now().plusDays(10), new VacationPlan(LocalDate.now().plusDays(5), LocalDate.now().plusDays(10), 2,
-                "San Francisco, CA", "New York, NY").possibleEndDate());
+                "SFO", "MBJ").possibleEndDate());
     }
 
     @Test
     public void minDurationInDays() throws Exception {
         assertTrue(2 == new VacationPlan(LocalDate.now().plusDays(5), LocalDate.now().plusDays(10), 2,
-                "San Francisco, CA", "New York, NY").minDurationInDays());
+                "SFO", "MBJ").minDurationInDays());
     }
 
     @Test
     public void departureCity() throws Exception {
-        assertEquals("San Francisco, CA", new VacationPlan(LocalDate.now().plusDays(5), LocalDate.now().plusDays(10), 2,
-                "San Francisco, CA", "New York, NY").departureCity());
+        assertEquals("SFO", new VacationPlan(LocalDate.now().plusDays(5), LocalDate.now().plusDays(10), 2,
+                "SFO", "MBJ").departure());
     }
 
     @Test
     public void destinationCity() throws Exception {
-        assertEquals("New York, NY", new VacationPlan(LocalDate.now().plusDays(5), LocalDate.now().plusDays(10), 2,
-                "San Francisco, CA", "New York, NY").destinationCity());
+        assertEquals("MBJ", new VacationPlan(LocalDate.now().plusDays(5), LocalDate.now().plusDays(10), 2,
+                "SFO", "MBJ").destination());
     }
 
     @Test
     public void optionsForDateRanges() throws Exception {
         VacationPlan vacationPlan = new VacationPlan(LocalDate.now().plusDays(5), LocalDate.now().plusDays(10), 2,
-                "San Francisco, CA", "New York, NY");
+                "SFO", "MBJ");
 
         Set<DateRange> optionsForDateRanges = new HashSet<>();
         optionsForDateRanges.add(new DateRange(LocalDate.now().plusDays(5), LocalDate.now().plusDays(7)));
