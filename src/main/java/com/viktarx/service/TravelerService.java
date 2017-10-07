@@ -3,12 +3,15 @@ package com.viktarx.service;
 import com.viktarx.agent.TripOption;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 /**
  *
  */
 public final class TravelerService implements TripService {
+
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MMM-dd");
 
     private final Request request;
 
@@ -30,6 +33,8 @@ public final class TravelerService implements TripService {
     }
 
     private static String travelerParams(String departure, String destination, LocalDate startDate, LocalDate endDate) {
-        return null;
+        return "?departure=" + departure + "&destination=" + destination +
+                "&start=" + formatter.format(startDate) +
+                "&end=" + formatter.format(endDate);
     }
 }
