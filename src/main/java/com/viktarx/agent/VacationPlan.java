@@ -12,19 +12,19 @@ public class VacationPlan {
     private final LocalDate possibleStartDate;
     private final LocalDate possibleEndDate;
     private final int minDurationInDays;
-    private final String departureCity;
-    private final String destinationCity;
+    private final String departure;
+    private final String destination;
 
     private final Set<DateRange> optionsForDateRanges = new HashSet<>();
 
-    public VacationPlan(LocalDate possibleStartDate, LocalDate possibleEndDate, int minDurationInDays, String departureCity,
-                        String destinationCity) {
-        checkArguments(possibleStartDate, possibleEndDate, minDurationInDays, departureCity, destinationCity);
+    public VacationPlan(LocalDate possibleStartDate, LocalDate possibleEndDate, int minDurationInDays, String departure,
+                        String destination) {
+        checkArguments(possibleStartDate, possibleEndDate, minDurationInDays, departure, destination);
         this.possibleStartDate = possibleStartDate;
         this.possibleEndDate = possibleEndDate;
         this.minDurationInDays = minDurationInDays;
-        this.departureCity = departureCity;
-        this.destinationCity = destinationCity;
+        this.departure = departure;
+        this.destination = destination;
     }
 
     public LocalDate possibleStartDate() {
@@ -39,12 +39,12 @@ public class VacationPlan {
         return minDurationInDays;
     }
 
-    public String departureCity() {
-        return departureCity;
+    public String departure() {
+        return departure;
     }
 
-    public String destinationCity() {
-        return destinationCity;
+    public String destination() {
+        return destination;
     }
 
     public final Set<DateRange> optionsForDateRanges() {
@@ -69,10 +69,10 @@ public class VacationPlan {
         checkLocations(departureCity, destinationCity);
     }
 
-    private void checkLocations(String departureCity, String destinationCity) {
-        if (locationsAreTheSame(departureCity, destinationCity))
-            throw new IllegalArgumentException(String.format("Departure city %s should be different from destination city %s",
-                    departureCity, destinationCity));
+    private void checkLocations(String departure, String destination) {
+        if (locationsAreTheSame(departure, destination))
+            throw new IllegalArgumentException(String.format("Departure %s should be different from destinations %s",
+                    departure, destination));
     }
 
     private boolean locationsAreTheSame(String departureCity, String destinationCity) {
@@ -107,9 +107,9 @@ public class VacationPlan {
             return false;
         if (possibleEndDate != null ? !possibleEndDate.equals(that.possibleEndDate) : that.possibleEndDate != null)
             return false;
-        if (departureCity != null ? !departureCity.equals(that.departureCity) : that.departureCity != null)
+        if (departure != null ? !departure.equals(that.departure) : that.departure != null)
             return false;
-        return destinationCity != null ? destinationCity.equals(that.destinationCity) : that.destinationCity == null;
+        return destination != null ? destination.equals(that.destination) : that.destination == null;
     }
 
     @Override
@@ -117,8 +117,8 @@ public class VacationPlan {
         int result = possibleStartDate != null ? possibleStartDate.hashCode() : 0;
         result = 31 * result + (possibleEndDate != null ? possibleEndDate.hashCode() : 0);
         result = 31 * result + minDurationInDays;
-        result = 31 * result + (departureCity != null ? departureCity.hashCode() : 0);
-        result = 31 * result + (destinationCity != null ? destinationCity.hashCode() : 0);
+        result = 31 * result + (departure != null ? departure.hashCode() : 0);
+        result = 31 * result + (destination != null ? destination.hashCode() : 0);
         return result;
     }
 
@@ -128,8 +128,8 @@ public class VacationPlan {
                 "possibleStartDate=" + possibleStartDate +
                 ", possibleEndDate=" + possibleEndDate +
                 ", minDurationInDays=" + minDurationInDays +
-                ", departureCity='" + departureCity + '\'' +
-                ", destinationCity='" + destinationCity + '\'' +
+                ", departure='" + departure + '\'' +
+                ", destination='" + destination + '\'' +
                 '}';
     }
 }
