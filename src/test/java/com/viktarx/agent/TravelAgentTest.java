@@ -1,5 +1,8 @@
 package com.viktarx.agent;
 
+import com.viktarx.service.TravelerRequest;
+import com.viktarx.service.TravelerService;
+import com.viktarx.service.TripService;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -14,8 +17,11 @@ public class TravelAgentTest {
     @Test
     public void offerTripOptionsForVacationPlan() throws Exception {
         VacationPlan vacationPlan = new VacationPlan(LocalDate.now().plusDays(5), LocalDate.now().plusDays(10), 2,
-                "San Francisco, CA", "New York, NY");
-        Set<TripOption> tripOptions = new TravelAgent().offerTripOptionsForVacationPlan(vacationPlan);
+                "SFO", "MBJ");
+        TripService service = new TravelerService(
+                new TravelerRequest("https://private-89a542-vacation.apiary-mock.com")
+        );
+        Set<TripOption> tripOptions = new TravelAgent(service).offerTripOptionsForVacationPlan(vacationPlan);
         assertTrue(tripOptions != null && !tripOptions.isEmpty());
     }
 
