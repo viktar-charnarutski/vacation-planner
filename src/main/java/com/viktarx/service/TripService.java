@@ -10,6 +10,6 @@ import java.util.Set;
  */
 interface TripService {
 
-    Set<TripOption> tripOptions(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate);
+    Set<TripOption> tripOptions(String departure, String destination, LocalDate startDate, LocalDate endDate);
 
 }

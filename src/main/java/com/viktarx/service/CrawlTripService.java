@@ -15,8 +15,8 @@ import java.util.Set;
 abstract class CrawlTripService implements TripService {
 
     @Override
-    public Set<TripOption> tripOptions(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate) {
-        return parsedTripOptionsFromRawResponse(rawDataFor(departureCity, destinationCity, startDate, endDate));
+    public Set<TripOption> tripOptions(String departure, String destination, LocalDate startDate, LocalDate endDate) {
+        return parsedTripOptionsFromRawResponse(rawDataFor(departure, destination, startDate, endDate));
     }
 
     abstract String rawDataFor(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate);

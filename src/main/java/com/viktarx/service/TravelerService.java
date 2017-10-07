@@ -17,10 +17,10 @@ public final class TravelerService implements TripService {
     }
 
     @Override
-    public Set<TripOption> tripOptions(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate) {
+    public Set<TripOption> tripOptions(String departure, String destination, LocalDate startDate, LocalDate endDate) {
         return tripOptionsFromJson(
                 this.request.get(
-                        travelerParams(departureCity, destinationCity, startDate, endDate)
+                        travelerParams(departure, destination, startDate, endDate)
                 )
         );
     }
@@ -29,7 +29,7 @@ public final class TravelerService implements TripService {
         return null;
     }
 
-    private static String travelerParams(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate) {
+    private static String travelerParams(String departure, String destination, LocalDate startDate, LocalDate endDate) {
         return null;
     }
 }
