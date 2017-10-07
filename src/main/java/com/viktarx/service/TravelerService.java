@@ -4,6 +4,7 @@ import com.viktarx.agent.TripOption;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -29,7 +30,8 @@ public final class TravelerService implements TripService {
     }
 
     private static Set<TripOption> tripOptionsFromJson(String json) {
-        return null;
+        // TODO introduce JSON - TripOption object conversion
+        return new HashSet<>();
     }
 
     private static String travelerParams(String departure, String destination, LocalDate startDate, LocalDate endDate) {

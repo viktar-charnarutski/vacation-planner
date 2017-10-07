@@ -34,7 +34,6 @@ public final class TravelerRequest implements Request {
             throw new IllegalStateException(String.format("Failed to communicate with %s due to: %s",
                     this.serviceUrl, e.getCause()));
         }
-        System.out.println(response.toString());
         return response.toString();
     }
 

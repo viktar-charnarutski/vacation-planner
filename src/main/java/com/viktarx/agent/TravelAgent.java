@@ -1,8 +1,7 @@
 package com.viktarx.agent;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.time.LocalDate;
+import com.viktarx.service.TripService;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,24 +10,20 @@ import java.util.Set;
  */
 public class TravelAgent implements TravelResearch {
 
+    private final TripService service;
+
+    public TravelAgent(TripService service) {
+        this.service = service;
+    }
 
     public Set<TripOption> offerTripOptionsForVacationPlan(VacationPlan vacationPlan) {
         Set<TripOption> tripOptions = new HashSet<>();
         for (DateRange dateRange : vacationPlan.optionsForDateRanges()) {
-            tripOptions.addAll(optionsAvailableForDates(vacationPlan.departureCity(), vacationPlan.destinationCity(),
-                    dateRange.startDate(), dateRange.endDate()));
-        }
-        return tripOptions;
-    }
-
-    // TODO: a service implementation is pending
-    private Set<TripOption> optionsAvailableForDates(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate) {
-        Set<TripOption> tripOptions = new HashSet<>();
-        try {
-            tripOptions.add(new TripOption(LocalDate.now(), LocalDate.now().plusDays(5), 1099,
-                    new URL("https://www.example.com")));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+            tripOptions.addAll(
+                    this.service.tripOptions(
+                            vacationPlan.departure(), vacationPlan.destination(), dateRange.startDate(), dateRange.endDate()
+                    )
+            );
         }
         return tripOptions;
     }
