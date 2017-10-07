@@ -12,8 +12,6 @@ import java.net.URL;
  */
 public final class TravelerRequest implements Request {
 
-    private static String POST_URI = "";
-    private static String GET_URI = "/trips";
     private static String USER_AGENT = "Mozilla/5.0";
 
     private final String serviceUrl;
@@ -27,7 +25,7 @@ public final class TravelerRequest implements Request {
         HttpURLConnection connection;
         StringBuilder response;
         try {
-            URL targetUrl = new URL(this.serviceUrl + GET_URI + params);
+            URL targetUrl = new URL(this.serviceUrl + "/trips" + params);
             connection = (HttpURLConnection) targetUrl.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("User-Agent", USER_AGENT);
@@ -36,6 +34,7 @@ public final class TravelerRequest implements Request {
             throw new IllegalStateException(String.format("Failed to communicate with %s due to: %s",
                     this.serviceUrl, e.getCause()));
         }
+        System.out.println(response.toString());
         return response.toString();
     }
 
@@ -44,7 +43,7 @@ public final class TravelerRequest implements Request {
         HttpURLConnection connection;
         StringBuilder response;
         try {
-            URL obj = new URL(this.serviceUrl + POST_URI);
+            URL obj = new URL(this.serviceUrl);
             connection = (HttpURLConnection) obj.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("User-Agent", USER_AGENT);
