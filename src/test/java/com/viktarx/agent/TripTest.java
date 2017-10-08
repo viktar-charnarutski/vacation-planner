@@ -17,7 +17,7 @@ public class TripTest {
     private Trip trip;
 
     public TripTest() throws MalformedURLException {
-        hotel = new Hotel("San Souce", "A3, St-Mary, Jamaica", "All Inclusive", 4.0, 4.0, "http://couples.com/resorts/sans-souci");
+        hotel = new Hotel("San Souce", "A3, St-Mary, Jamaica", "All Inclusive", 4.0, 4.8, new URL("http://couples.com/resorts/sans-souci"));
         trip = new Trip("SFO", "MJB", LocalDate.now(), LocalDate.now().plusDays(5), 1099, hotel, new URL("https://www.example.com"));
     }
 
