@@ -17,8 +17,18 @@ public class TripTest {
     private Trip trip;
 
     public TripTest() throws MalformedURLException {
-        hotel = new Hotel("San Souce", "A3, St-Mary, Jamaica", "All Inclusive", 4.0, 4.0,"http://couples.com/resorts/sans-souci");
+        hotel = new Hotel("San Souce", "A3, St-Mary, Jamaica", "All Inclusive", 4.0, 4.0, "http://couples.com/resorts/sans-souci");
         trip = new Trip("SFO", "MJB", LocalDate.now(), LocalDate.now().plusDays(5), 1099, hotel, new URL("https://www.example.com"));
+    }
+
+    @Test
+    public void departure() throws Exception {
+        assertEquals("SFO", trip.departure());
+    }
+
+    @Test
+    public void destination() throws Exception {
+        assertEquals("MJB", trip.destination());
     }
 
     @Test
@@ -34,6 +44,11 @@ public class TripTest {
     @Test
     public void priceInUsd() throws Exception {
         assertTrue(1099 == trip.priceInUsd());
+    }
+
+    @Test
+    public void hotel() throws Exception {
+        assertEquals(hotel, trip.hotel());
     }
 
     @Test
