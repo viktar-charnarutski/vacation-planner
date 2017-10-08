@@ -6,7 +6,7 @@ import java.time.LocalDate;
 /**
  * The class contains information about a trip.
  */
-public class Trip {
+public final class Trip {
 
     private final String departure;
     private final String destination;
