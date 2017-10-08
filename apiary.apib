@@ -5,57 +5,6 @@ HOST: http://polls.apiblueprint.org/
 
 Travel agent with trips options.
 
-## Trips Collection [/trips]
-
-### List All Trips [GET]
-
-+ Response 200 (application/json)
-
-        [
-            {
-                "departure": "SFO",
-                "destination": "MBJ",
-                "start_date": "2017-10-15T15:00:00.000Z",
-                "end_date": "2017-10-20T15:00:00.000Z",
-                "price_usd": 2999,
-                "url": "https://www.example.com/01",
-                "hotel":
-                    {
-                        "name": "Tower Isle",
-                        "type": "All Inclusive",
-                        "rating": 4.8
-                    }
-            },
-            {
-                "departure": "SFO",
-                "destination": "MBJ",
-                "start_date": "2017-10-15T20:00:00.000Z",
-                "end_date": "2017-10-20T25:00:00.000Z",
-                "price_usd": 5999,
-                "url": "https://www.example.com/02",
-                "hotel":
-                    {
-                        "name": "San Souci",
-                        "type": "All Inclusive VIP",
-                        "rating": 5.0
-                    }
-            },
-            {
-                "departure": "SFO",
-                "destination": "MBJ",
-                "start_date": "2017-10-15T25:00:00.000Z",
-                "end_date": "2017-10-20T30:00:00.000Z",
-                "price_usd": 3999,
-                "url": "https://www.example.com/03",
-                "hotel":
-                    {
-                        "name": "Sandals",
-                        "type": "All Inclusive",
-                        "rating": 4.9
-                    }
-            }
-        ]
-
 ## Get trip options [/trips/{?departure,destination,start,end}]
 
 + Parameters
@@ -64,7 +13,7 @@ Travel agent with trips options.
     + start (date) - vacation start date
     + end (date)- vacation end date
 
-### Get a trip option for passed parameters [GET]
+### Get trip options for passed parameters [GET]
 
 + Response 200 (application/json)
 
