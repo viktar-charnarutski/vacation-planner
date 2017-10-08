@@ -12,7 +12,7 @@ public final class Hotel {
     private final double rating;
     private final String url;
 
-    public Hotel(String name, String address, String type, double stars, double rating, String url) {
+    Hotel(String name, String address, String type, double stars, double rating, String url) {
         this.name = name;
         this.address = address;
         this.type = type;
