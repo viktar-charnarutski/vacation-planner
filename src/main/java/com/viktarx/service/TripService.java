@@ -1,6 +1,6 @@
 package com.viktarx.service;
 
-import com.viktarx.agent.TripOption;
+import com.viktarx.agent.Trip;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -10,6 +10,6 @@ import java.util.Set;
  */
 public interface TripService {
 
-    Set<TripOption> tripOptions(String departure, String destination, LocalDate startDate, LocalDate endDate);
+    Set<Trip> trips(String departure, String destination, LocalDate startDate, LocalDate endDate);
 
 }

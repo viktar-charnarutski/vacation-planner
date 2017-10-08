@@ -4,16 +4,16 @@ import java.net.URL;
 import java.time.LocalDate;
 
 /**
- * The class contains information of a trip.
+ * The class contains information about a trip.
  */
-public class TripOption {
+public class Trip {
 
     private final LocalDate startDate;
     private final LocalDate endDate;
     private final double priceInDollars;
     private final URL url;
 
-    public TripOption(LocalDate startDate, LocalDate endDate, double priceInDollars, URL url) {
+    public Trip(LocalDate startDate, LocalDate endDate, double priceInDollars, URL url) {
         checkArguments(startDate, endDate, priceInDollars, url);
         this.startDate = startDate;
         this.endDate = endDate;
@@ -62,9 +62,9 @@ public class TripOption {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TripOption)) return false;
+        if (!(o instanceof Trip)) return false;
 
-        TripOption that = (TripOption) o;
+        Trip that = (Trip) o;
 
         if (Double.compare(that.priceInDollars, priceInDollars) != 0) return false;
         if (!startDate.equals(that.startDate)) return false;
@@ -86,7 +86,7 @@ public class TripOption {
 
     @Override
     public String toString() {
-        return "TripOption{" +
+        return "Trip{" +
                 "startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", priceInDollars=" + priceInDollars +

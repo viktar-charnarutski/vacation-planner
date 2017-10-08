@@ -16,15 +16,15 @@ public class TravelAgent implements TravelResearch {
         this.service = service;
     }
 
-    public Set<TripOption> offerTripOptionsForVacationPlan(VacationPlan vacationPlan) {
-        Set<TripOption> tripOptions = new HashSet<>();
+    public Set<Trip> offerTripsForVacationPlan(VacationPlan vacationPlan) {
+        Set<Trip> trips = new HashSet<>();
         for (DateRange dateRange : vacationPlan.optionsForDateRanges()) {
-            tripOptions.addAll(
-                    this.service.tripOptions(
+            trips.addAll(
+                    this.service.trips(
                             vacationPlan.departure(), vacationPlan.destination(), dateRange.startDate(), dateRange.endDate()
                     )
             );
         }
-        return tripOptions;
+        return trips;
     }
 }

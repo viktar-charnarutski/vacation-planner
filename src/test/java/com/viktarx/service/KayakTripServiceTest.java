@@ -1,6 +1,6 @@
 package com.viktarx.service;
 
-import com.viktarx.agent.TripOption;
+import com.viktarx.agent.Trip;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -18,7 +18,7 @@ public class KayakTripServiceTest {
     }
 
     @Test
-    public void parsedTripOptionsFromWebPageContent() throws Exception {
+    public void parsedTripsFromWebPageContent() throws Exception {
     }
 
     @Test
@@ -26,10 +26,10 @@ public class KayakTripServiceTest {
     }
 
     @Test
-    public void tripOptions() throws Exception {
+    public void trips() throws Exception {
         TripService service = new KayakTripService();
-        Set<TripOption> tripOptions = service.tripOptions("San Francisco, CA", "New York, NY", LocalDate.now().plusDays(5), LocalDate.now().plusDays(7));
-        assertTrue(tripOptions != null && !tripOptions.isEmpty());
+        Set<Trip> trips = service.trips("San Francisco, CA", "New York, NY", LocalDate.now().plusDays(5), LocalDate.now().plusDays(7));
+        assertTrue(trips != null && !trips.isEmpty());
     }
 
     @Test

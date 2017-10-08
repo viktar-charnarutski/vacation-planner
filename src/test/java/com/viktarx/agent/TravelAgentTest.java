@@ -15,14 +15,14 @@ import static org.junit.Assert.*;
  */
 public class TravelAgentTest {
     @Test
-    public void offerTripOptionsForVacationPlan() throws Exception {
+    public void offerTripsForVacationPlan() throws Exception {
         VacationPlan vacationPlan = new VacationPlan(LocalDate.now().plusDays(5), LocalDate.now().plusDays(10), 2,
                 "SFO", "MBJ");
         TripService service = new TravelerService(
                 new TravelerRequest("https://private-89a542-vacation.apiary-mock.com")
         );
-        Set<TripOption> tripOptions = new TravelAgent(service).offerTripOptionsForVacationPlan(vacationPlan);
-        assertTrue(tripOptions != null && !tripOptions.isEmpty());
+        Set<Trip> trips = new TravelAgent(service).offerTripsForVacationPlan(vacationPlan);
+        assertTrue(trips != null && !trips.isEmpty());
     }
 
 }

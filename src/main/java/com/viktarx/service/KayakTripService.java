@@ -1,6 +1,6 @@
 package com.viktarx.service;
 
-import com.viktarx.agent.TripOption;
+import com.viktarx.agent.Trip;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -64,16 +64,16 @@ class KayakTripService extends CrawlTripService {
     }
 
     @Override
-    Set<TripOption> parsedTripOptionsFromRawResponse(String response) {
-        Set<TripOption> tripOptions = new HashSet<>();
+    Set<Trip> parsedTripsFromRawResponse(String response) {
+        Set<Trip> trips = new HashSet<>();
         try {
-            TripOption tripOption = new TripOption(LocalDate.now(), LocalDate.now().plusDays(5), 1099,
+            Trip trip = new Trip(LocalDate.now(), LocalDate.now().plusDays(5), 1099,
                     new URL("https://www.example.com"));
-            tripOptions.add(tripOption);
+            trips.add(trip);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        return tripOptions;
+        return trips;
     }
 
 }

@@ -1,6 +1,6 @@
 package com.viktarx.service;
 
-import com.viktarx.agent.TripOption;
+import com.viktarx.agent.Trip;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -15,13 +15,13 @@ import java.util.Set;
 abstract class CrawlTripService implements TripService {
 
     @Override
-    public Set<TripOption> tripOptions(String departure, String destination, LocalDate startDate, LocalDate endDate) {
-        return parsedTripOptionsFromRawResponse(rawDataFor(departure, destination, startDate, endDate));
+    public Set<Trip> trips(String departure, String destination, LocalDate startDate, LocalDate endDate) {
+        return parsedTripsFromRawResponse(rawDataFor(departure, destination, startDate, endDate));
     }
 
     abstract String rawDataFor(String departureCity, String destinationCity, LocalDate startDate, LocalDate endDate);
 
-    abstract Set<TripOption> parsedTripOptionsFromRawResponse(String response);
+    abstract Set<Trip> parsedTripsFromRawResponse(String response);
 
     abstract String serviceUrl();
 
