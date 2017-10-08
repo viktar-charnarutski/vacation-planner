@@ -91,7 +91,7 @@ public class Trip {
 
     private static void checkUrl(URL url) {
         if (url == null)
-            throw new IllegalArgumentException(String.format("Wrong URL was provided: %s", url));
+            throw new IllegalArgumentException("URL should not be null.");
     }
 
     @Override
