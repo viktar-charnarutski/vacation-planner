@@ -25,9 +25,9 @@ public class TripTest {
     }
 
     @Test
-    public void priceInDollars() throws Exception {
+    public void priceInUsd() throws Exception {
         assertTrue(1099 == new Trip("SFO", "MJB", LocalDate.now(), LocalDate.now().plusDays(5), 1099,
-                new URL("https://www.example.com")).priceInDollars());
+                new URL("https://www.example.com")).priceInUsd());
     }
 
     @Test

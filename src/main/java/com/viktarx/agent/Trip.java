@@ -12,16 +12,16 @@ public class Trip {
     private final String destination;
     private final LocalDate startDate;
     private final LocalDate endDate;
-    private final double priceInDollars;
+    private final double priceInUsd;
     private final URL url;
 
-    public Trip(String departure, String destination, LocalDate startDate, LocalDate endDate, double priceInDollars, URL url) {
-        checkArguments(departure, destination, startDate, endDate, priceInDollars, url);
+    public Trip(String departure, String destination, LocalDate startDate, LocalDate endDate, double priceInUsd, URL url) {
+        checkArguments(departure, destination, startDate, endDate, priceInUsd, url);
         this.departure = departure;
         this.destination = destination;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.priceInDollars = priceInDollars;
+        this.priceInUsd = priceInUsd;
         this.url = url;
     }
 
@@ -41,18 +41,18 @@ public class Trip {
         return endDate;
     }
 
-    public double priceInDollars() {
-        return priceInDollars;
+    public double priceInUsd() {
+        return priceInUsd;
     }
 
     public URL url() {
         return url;
     }
 
-    private static void checkArguments(String departure, String destination, LocalDate startDate, LocalDate endDate, double priceInDollars, URL url) {
+    private static void checkArguments(String departure, String destination, LocalDate startDate, LocalDate endDate, double priceInUsd, URL url) {
         checkLocations(departure, destination);
         checkDates(startDate, endDate);
-        checkPrice(priceInDollars);
+        checkPrice(priceInUsd);
         checkUrl(url);
     }
 
@@ -89,7 +89,7 @@ public class Trip {
 
         Trip trip = (Trip) o;
 
-        if (Double.compare(trip.priceInDollars, priceInDollars) != 0) return false;
+        if (Double.compare(trip.priceInUsd, priceInUsd) != 0) return false;
         if (!departure.equals(trip.departure)) return false;
         if (!destination.equals(trip.destination)) return false;
         if (!startDate.equals(trip.startDate)) return false;
@@ -105,7 +105,7 @@ public class Trip {
         result = 31 * result + destination.hashCode();
         result = 31 * result + startDate.hashCode();
         result = 31 * result + endDate.hashCode();
-        temp = Double.doubleToLongBits(priceInDollars);
+        temp = Double.doubleToLongBits(priceInUsd);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + url.hashCode();
         return result;
@@ -118,7 +118,7 @@ public class Trip {
                 ", destination='" + destination + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", priceInDollars=" + priceInDollars +
+                ", priceInUsd=" + priceInUsd +
                 ", url=" + url +
                 '}';
     }
