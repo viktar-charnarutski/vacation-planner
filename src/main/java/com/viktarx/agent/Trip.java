@@ -8,17 +8,29 @@ import java.time.LocalDate;
  */
 public class Trip {
 
+    private final String departure;
+    private final String destination;
     private final LocalDate startDate;
     private final LocalDate endDate;
     private final double priceInDollars;
     private final URL url;
 
-    public Trip(LocalDate startDate, LocalDate endDate, double priceInDollars, URL url) {
-        checkArguments(startDate, endDate, priceInDollars, url);
+    public Trip(String departure, String destination, LocalDate startDate, LocalDate endDate, double priceInDollars, URL url) {
+        checkArguments(departure, destination, startDate, endDate, priceInDollars, url);
+        this.departure = departure;
+        this.destination = destination;
         this.startDate = startDate;
         this.endDate = endDate;
         this.priceInDollars = priceInDollars;
         this.url = url;
+    }
+
+    public String departure() {
+        return departure;
+    }
+
+    public String destination() {
+        return destination;
     }
 
     public LocalDate startDate() {
@@ -37,24 +49,35 @@ public class Trip {
         return url;
     }
 
-    private void checkArguments(LocalDate startDate, LocalDate endDate, double priceInDollars, URL url) {
+    private static void checkArguments(String departure, String destination, LocalDate startDate, LocalDate endDate, double priceInDollars, URL url) {
+        checkLocations(departure, destination);
         checkDates(startDate, endDate);
         checkPrice(priceInDollars);
         checkUrl(url);
     }
 
-    private void checkDates(LocalDate startDate, LocalDate endDate) {
+    private static void checkLocations(String departure, String destination) {
+        if (locationsAreTheSame(departure, destination))
+            throw new IllegalArgumentException(String.format("Departure %s should be different from destinations %s",
+                    departure, destination));
+    }
+
+    private static boolean locationsAreTheSame(String departureCity, String destinationCity) {
+        return departureCity.equals(destinationCity);
+    }
+
+    private static void checkDates(LocalDate startDate, LocalDate endDate) {
         if (endDate.isBefore(startDate) || startDate.equals(endDate))
             throw new IllegalArgumentException(String.format("The start date %s should be after the end date %s",
                     startDate, endDate));
     }
 
-    private void checkPrice(double price) {
+    private static void checkPrice(double price) {
         if (price < 0)
             throw new IllegalArgumentException(String.format("Price %s could not be negative", price));
     }
 
-    private void checkUrl(URL url) {
+    private static void checkUrl(URL url) {
         if (url == null)
             throw new IllegalArgumentException(String.format("Wrong URL was provided: %s", url));
     }
@@ -64,19 +87,23 @@ public class Trip {
         if (this == o) return true;
         if (!(o instanceof Trip)) return false;
 
-        Trip that = (Trip) o;
+        Trip trip = (Trip) o;
 
-        if (Double.compare(that.priceInDollars, priceInDollars) != 0) return false;
-        if (!startDate.equals(that.startDate)) return false;
-        if (!endDate.equals(that.endDate)) return false;
-        return url.equals(that.url);
+        if (Double.compare(trip.priceInDollars, priceInDollars) != 0) return false;
+        if (!departure.equals(trip.departure)) return false;
+        if (!destination.equals(trip.destination)) return false;
+        if (!startDate.equals(trip.startDate)) return false;
+        if (!endDate.equals(trip.endDate)) return false;
+        return url.equals(trip.url);
     }
 
     @Override
     public int hashCode() {
         int result;
         long temp;
-        result = startDate.hashCode();
+        result = departure.hashCode();
+        result = 31 * result + destination.hashCode();
+        result = 31 * result + startDate.hashCode();
         result = 31 * result + endDate.hashCode();
         temp = Double.doubleToLongBits(priceInDollars);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
@@ -87,7 +114,9 @@ public class Trip {
     @Override
     public String toString() {
         return "Trip{" +
-                "startDate=" + startDate +
+                "departure='" + departure + '\'' +
+                ", destination='" + destination + '\'' +
+                ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", priceInDollars=" + priceInDollars +
                 ", url=" + url +

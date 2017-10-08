@@ -67,7 +67,7 @@ class KayakTripService extends CrawlTripService {
     Set<Trip> parsedTripsFromRawResponse(String response) {
         Set<Trip> trips = new HashSet<>();
         try {
-            Trip trip = new Trip(LocalDate.now(), LocalDate.now().plusDays(5), 1099,
+            Trip trip = new Trip("SFO", "MBJ", LocalDate.now(), LocalDate.now().plusDays(5), 1099,
                     new URL("https://www.example.com"));
             trips.add(trip);
         } catch (MalformedURLException e) {
