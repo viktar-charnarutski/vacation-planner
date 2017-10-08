@@ -1,5 +1,7 @@
 package com.viktarx.agent;
 
+import java.net.URL;
+
 /**
  * The class contains information about a hotel.
  */
@@ -10,9 +12,9 @@ public final class Hotel {
     private final String type;
     private final double stars;
     private final double rating;
-    private final String url;
+    private final URL url;
 
-    Hotel(String name, String address, String type, double stars, double rating, String url) {
+    Hotel(String name, String address, String type, double stars, double rating, URL url) {
         this.name = name;
         this.address = address;
         this.type = type;
@@ -41,7 +43,7 @@ public final class Hotel {
         return rating;
     }
 
-    public String url() {
+    public URL url() {
         return url;
     }
 
@@ -83,7 +85,7 @@ public final class Hotel {
                 ", type='" + type + '\'' +
                 ", stars=" + stars +
                 ", rating=" + rating +
-                ", url='" + url + '\'' +
+                ", url=" + url +
                 '}';
     }
 }
