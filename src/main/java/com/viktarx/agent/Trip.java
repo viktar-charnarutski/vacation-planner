@@ -16,7 +16,7 @@ public final class Trip {
     private final Hotel hotel;
     private final URL url;
 
-    public Trip(String departure, String destination, LocalDate startDate, LocalDate endDate, double priceInUsd, Hotel hotel, URL url) {
+    Trip(String departure, String destination, LocalDate startDate, LocalDate endDate, double priceInUsd, Hotel hotel, URL url) {
         checkArguments(departure, destination, startDate, endDate, priceInUsd, hotel, url);
         this.departure = departure;
         this.destination = destination;
@@ -26,6 +26,7 @@ public final class Trip {
         this.hotel = hotel;
         this.url = url;
     }
+
 
     public String departure() {
         return departure;
@@ -137,4 +138,5 @@ public final class Trip {
                 ", url=" + url +
                 '}';
     }
+
 }
