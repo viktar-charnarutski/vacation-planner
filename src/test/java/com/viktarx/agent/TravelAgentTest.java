@@ -21,7 +21,7 @@ public class TravelAgentTest {
         TripService service = new TravelerService(
                 new TravelerRequest("https://private-89a542-vacation.apiary-mock.com")
         );
-        Set<Trip> trips = new TravelAgent(service).offerTripsForVacationPlan(vacationPlan);
+        Set<VacationTrip> trips = new TravelAgent(service).offerTripsForVacationPlan(vacationPlan);
         assertTrue(trips != null && !trips.isEmpty());
     }
 

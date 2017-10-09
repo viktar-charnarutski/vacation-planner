@@ -1,6 +1,6 @@
 package com.viktarx.service;
 
-import com.viktarx.agent.Trip;
+import com.viktarx.agent.VacationTrip;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +21,7 @@ public final class TravelerService implements TripService {
     }
 
     @Override
-    public Set<Trip> trips(String departure, String destination, LocalDate startDate, LocalDate endDate) {
+    public Set<VacationTrip> trips(String departure, String destination, LocalDate startDate, LocalDate endDate) {
         return tripsFromJson(
                 this.request.get(
                         travelerParams(departure, destination, startDate, endDate)
@@ -29,8 +29,8 @@ public final class TravelerService implements TripService {
         );
     }
 
-    private static Set<Trip> tripsFromJson(String json) {
-        // TODO introduce JSON - Trip object conversion
+    private static Set<VacationTrip> tripsFromJson(String json) {
+        // TODO introduce JSON - FlightHotelBundle object conversion
         return new HashSet<>();
     }
 

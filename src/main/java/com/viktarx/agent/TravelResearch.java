@@ -3,10 +3,10 @@ package com.viktarx.agent;
 import java.util.Set;
 
 /**
- * Trip search functionality description.
+ * FlightHotelBundle search functionality description.
  */
 public interface TravelResearch {
 
-    Set<Trip> offerTripsForVacationPlan(VacationPlan vacationPlan);
+    Set<VacationTrip> offerTripsForVacationPlan(VacationPlan vacationPlan);
 
 }

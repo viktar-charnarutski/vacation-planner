@@ -6,7 +6,7 @@ import java.time.LocalDate;
 /**
  * The class contains information about a trip.
  */
-public final class Trip {
+public final class FlightHotelBundle implements VacationTrip {
 
     private final String departure;
     private final String destination;
@@ -16,7 +16,7 @@ public final class Trip {
     private final Hotel hotel;
     private final URL url;
 
-    Trip(String departure, String destination, LocalDate startDate, LocalDate endDate, Price price, Hotel hotel, URL url) {
+    FlightHotelBundle(String departure, String destination, LocalDate startDate, LocalDate endDate, Price price, Hotel hotel, URL url) {
         checkArguments(departure, destination, startDate, endDate, price, hotel, url);
         this.departure = departure;
         this.destination = destination;
@@ -27,22 +27,27 @@ public final class Trip {
         this.url = url;
     }
 
+    @Override
     public String departure() {
         return departure;
     }
 
+    @Override
     public String destination() {
         return destination;
     }
 
+    @Override
     public LocalDate startDate() {
         return startDate;
     }
 
+    @Override
     public LocalDate endDate() {
         return endDate;
     }
 
+    @Override
     public Price price() {
         return price;
     }
@@ -97,17 +102,17 @@ public final class Trip {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Trip)) return false;
+        if (!(o instanceof FlightHotelBundle)) return false;
 
-        Trip trip = (Trip) o;
+        FlightHotelBundle flightHotelBundle = (FlightHotelBundle) o;
 
-        if (!departure.equals(trip.departure)) return false;
-        if (!destination.equals(trip.destination)) return false;
-        if (!startDate.equals(trip.startDate)) return false;
-        if (!endDate.equals(trip.endDate)) return false;
-        if (!price.equals(trip.price)) return false;
-        if (!hotel.equals(trip.hotel)) return false;
-        return url.equals(trip.url);
+        if (!departure.equals(flightHotelBundle.departure)) return false;
+        if (!destination.equals(flightHotelBundle.destination)) return false;
+        if (!startDate.equals(flightHotelBundle.startDate)) return false;
+        if (!endDate.equals(flightHotelBundle.endDate)) return false;
+        if (!price.equals(flightHotelBundle.price)) return false;
+        if (!hotel.equals(flightHotelBundle.hotel)) return false;
+        return url.equals(flightHotelBundle.url);
     }
 
     @Override
@@ -124,7 +129,7 @@ public final class Trip {
 
     @Override
     public String toString() {
-        return "Trip{" +
+        return "FlightHotelBundle{" +
                 "departure='" + departure + '\'' +
                 ", destination='" + destination + '\'' +
                 ", startDate=" + startDate +

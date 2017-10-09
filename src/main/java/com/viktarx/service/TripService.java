@@ -1,15 +1,15 @@
 package com.viktarx.service;
 
-import com.viktarx.agent.Trip;
+import com.viktarx.agent.VacationTrip;
 
 import java.time.LocalDate;
 import java.util.Set;
 
 /**
- * Trip service's functionality description.
+ * FlightHotelBundle service's functionality description.
  */
 public interface TripService {
 
-    Set<Trip> trips(String departure, String destination, LocalDate startDate, LocalDate endDate);
+    Set<VacationTrip> trips(String departure, String destination, LocalDate startDate, LocalDate endDate);
 
 }
