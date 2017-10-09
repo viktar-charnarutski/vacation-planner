@@ -12,21 +12,20 @@ public final class Trip {
     private final String destination;
     private final LocalDate startDate;
     private final LocalDate endDate;
-    private final double priceInUsd;
+    private final Price price;
     private final Hotel hotel;
     private final URL url;
 
-    Trip(String departure, String destination, LocalDate startDate, LocalDate endDate, double priceInUsd, Hotel hotel, URL url) {
-        checkArguments(departure, destination, startDate, endDate, priceInUsd, hotel, url);
+    Trip(String departure, String destination, LocalDate startDate, LocalDate endDate, Price price, Hotel hotel, URL url) {
+        checkArguments(departure, destination, startDate, endDate, price, hotel, url);
         this.departure = departure;
         this.destination = destination;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.priceInUsd = priceInUsd;
+        this.price = price;
         this.hotel = hotel;
         this.url = url;
     }
-
 
     public String departure() {
         return departure;
@@ -44,8 +43,8 @@ public final class Trip {
         return endDate;
     }
 
-    public double priceInUsd() {
-        return priceInUsd;
+    public Price price() {
+        return price;
     }
 
     public Hotel hotel() {
@@ -56,10 +55,10 @@ public final class Trip {
         return url;
     }
 
-    private static void checkArguments(String departure, String destination, LocalDate startDate, LocalDate endDate, double priceInUsd, Hotel hotel, URL url) {
+    private static void checkArguments(String departure, String destination, LocalDate startDate, LocalDate endDate, Price price, Hotel hotel, URL url) {
         checkLocations(departure, destination);
         checkDates(startDate, endDate);
-        checkPrice(priceInUsd);
+        checkPrice(price);
         checkHotel(hotel);
         checkUrl(url);
     }
@@ -80,9 +79,9 @@ public final class Trip {
                     startDate, endDate));
     }
 
-    private static void checkPrice(double price) {
-        if (price < 0)
-            throw new IllegalArgumentException(String.format("Price %s could not be negative", price));
+    private static void checkPrice(Price price) {
+        if (price == null)
+            throw new IllegalArgumentException("Price object could not be null");
     }
 
     private static void checkHotel(Hotel hotel) {
@@ -102,25 +101,22 @@ public final class Trip {
 
         Trip trip = (Trip) o;
 
-        if (Double.compare(trip.priceInUsd, priceInUsd) != 0) return false;
         if (!departure.equals(trip.departure)) return false;
         if (!destination.equals(trip.destination)) return false;
         if (!startDate.equals(trip.startDate)) return false;
         if (!endDate.equals(trip.endDate)) return false;
+        if (!price.equals(trip.price)) return false;
         if (!hotel.equals(trip.hotel)) return false;
         return url.equals(trip.url);
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = departure.hashCode();
+        int result = departure.hashCode();
         result = 31 * result + destination.hashCode();
         result = 31 * result + startDate.hashCode();
         result = 31 * result + endDate.hashCode();
-        temp = Double.doubleToLongBits(priceInUsd);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + price.hashCode();
         result = 31 * result + hotel.hashCode();
         result = 31 * result + url.hashCode();
         return result;
@@ -133,10 +129,9 @@ public final class Trip {
                 ", destination='" + destination + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", priceInUsd=" + priceInUsd +
+                ", price=" + price +
                 ", hotel=" + hotel +
                 ", url=" + url +
                 '}';
     }
-
 }
