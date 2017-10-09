@@ -35,7 +35,7 @@ public final class TravelerService implements TripService {
     }
 
     private static String travelerParams(String departure, String destination, LocalDate startDate, LocalDate endDate) {
-        return "?departure=" + departure + "&destination=" + destination +
+        return "/?departure=" + departure + "&destination=" + destination +
                 "&start=" + formatter.format(startDate) +
                 "&end=" + formatter.format(endDate);
     }
