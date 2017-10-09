@@ -7,7 +7,7 @@ public interface Deal {
 
     double originalPriceInUsd();
 
-    double finalPriceInUsd();
+    double discountPriceInUsd();
 
     double discountPercentage();
 

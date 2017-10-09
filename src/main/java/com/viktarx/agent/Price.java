@@ -6,12 +6,12 @@ package com.viktarx.agent;
 public final class Price implements Deal {
 
     private final double originalPriceInUsd;
-    private final double finalPriceInUsd;
+    private final double discountPriceInUsd;
 
-    Price(double originalPriceInUsd, double finalPriceInUsd) {
-        checkParameters(originalPriceInUsd, finalPriceInUsd);
+    Price(double originalPriceInUsd, double discountPriceInUsd) {
+        checkParameters(originalPriceInUsd, discountPriceInUsd);
         this.originalPriceInUsd = originalPriceInUsd;
-        this.finalPriceInUsd = finalPriceInUsd;
+        this.discountPriceInUsd = discountPriceInUsd;
     }
 
     @Override
@@ -20,13 +20,13 @@ public final class Price implements Deal {
     }
 
     @Override
-    public double finalPriceInUsd() {
-        return finalPriceInUsd;
+    public double discountPriceInUsd() {
+        return discountPriceInUsd;
     }
 
     @Override
     public double discountPercentage() {
-        return (originalPriceInUsd - finalPriceInUsd) / originalPriceInUsd * 100;
+        return (originalPriceInUsd - discountPriceInUsd) / originalPriceInUsd * 100;
     }
 
     @Override
@@ -37,7 +37,7 @@ public final class Price implements Deal {
         Price price = (Price) o;
 
         if (Double.compare(price.originalPriceInUsd, originalPriceInUsd) != 0) return false;
-        return Double.compare(price.finalPriceInUsd, finalPriceInUsd) == 0;
+        return Double.compare(price.discountPriceInUsd, discountPriceInUsd) == 0;
     }
 
     @Override
@@ -46,7 +46,7 @@ public final class Price implements Deal {
         long temp;
         temp = Double.doubleToLongBits(originalPriceInUsd);
         result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(finalPriceInUsd);
+        temp = Double.doubleToLongBits(discountPriceInUsd);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
@@ -55,7 +55,7 @@ public final class Price implements Deal {
     public String toString() {
         return "Price{" +
                 "originalPriceInUsd=" + originalPriceInUsd +
-                ", finalPriceInUsd=" + finalPriceInUsd +
+                ", discountPriceInUsd=" + discountPriceInUsd +
                 '}';
     }
 
@@ -67,7 +67,7 @@ public final class Price implements Deal {
             throw new IllegalArgumentException(String.format("Price %s should not be negative.", finalPriceInUsd));
 
         if (originalPriceInUsd < finalPriceInUsd)
-            throw new IllegalArgumentException(String.format("Original price %s should not be less than final price %s.",
+            throw new IllegalArgumentException(String.format("Original price %s should not be less than discount price %s.",
                     originalPriceInUsd, finalPriceInUsd));
     }
 }

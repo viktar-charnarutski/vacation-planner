@@ -45,7 +45,7 @@ public class TripTest {
 
     @Test
     public void priceInUsd() throws Exception {
-        assertTrue(999.9 == trip.price().finalPriceInUsd());
+        assertTrue(999.9 == trip.price().discountPriceInUsd());
     }
 
     @Test

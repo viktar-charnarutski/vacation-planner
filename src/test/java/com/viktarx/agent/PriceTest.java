@@ -17,8 +17,8 @@ public class PriceTest {
     }
 
     @Test
-    public void finalPriceInUsd() throws Exception {
-        assertTrue(999.9 == validPrice.finalPriceInUsd());
+    public void discountPriceInUsd() throws Exception {
+        assertTrue(999.9 == validPrice.discountPriceInUsd());
     }
 
     @Test
@@ -27,7 +27,7 @@ public class PriceTest {
     }
 
     @Test
-    public void wrongFinalPriceCheck() throws Exception {
+    public void wrongDiscountPriceCheck() throws Exception {
         boolean checkHandled = false;
         try {
             new Price(899.0, 999.9);
@@ -38,7 +38,7 @@ public class PriceTest {
     }
 
     @Test
-    public void negativeFinalPriceCheck() throws Exception {
+    public void negativeDiscountPriceCheck() throws Exception {
         boolean checkHandled = false;
         try {
             new Price(899.0, -1.0);
