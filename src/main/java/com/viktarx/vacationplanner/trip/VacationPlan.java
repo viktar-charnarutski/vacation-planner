@@ -1,4 +1,4 @@
-package com.viktarx.vacationplanner.agent;
+package com.viktarx.vacationplanner.trip;
 
 import java.time.LocalDate;
 import java.time.Period;

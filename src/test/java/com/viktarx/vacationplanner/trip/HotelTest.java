@@ -1,4 +1,4 @@
-package com.viktarx.vacationplanner.agent;
+package com.viktarx.vacationplanner.trip;
 
 import org.junit.Test;
 

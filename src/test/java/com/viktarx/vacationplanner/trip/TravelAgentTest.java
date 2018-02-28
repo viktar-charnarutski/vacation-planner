@@ -1,5 +1,6 @@
-package com.viktarx.vacationplanner.agent;
+package com.viktarx.vacationplanner.trip;
 
+import com.viktarx.vacationplanner.research.TravelAgent;
 import com.viktarx.vacationplanner.service.TravelerRequest;
 import com.viktarx.vacationplanner.service.TravelerService;
 import com.viktarx.vacationplanner.service.TripService;
