@@ -24,32 +24,32 @@ public class FlightHotelBundleTest {
     }
 
     @Test
-    public void departure() throws Exception {
+    public void departure() {
         assertEquals("SFO", flightHotelBundle.departure());
     }
 
     @Test
-    public void destination() throws Exception {
+    public void destination() {
         assertEquals("MJB", flightHotelBundle.destination());
     }
 
     @Test
-    public void startDate() throws Exception {
+    public void startDate() {
         assertEquals(LocalDate.now(), flightHotelBundle.startDate());
     }
 
     @Test
-    public void endDate() throws Exception {
+    public void endDate() {
         assertEquals(LocalDate.now().plusDays(5), flightHotelBundle.endDate());
     }
 
     @Test
-    public void priceInUsd() throws Exception {
+    public void priceInUsd() {
         assertTrue(999.9 == flightHotelBundle.price().discountPriceInUsd());
     }
 
     @Test
-    public void hotel() throws Exception {
+    public void hotel() {
         assertEquals(hotel, flightHotelBundle.hotel());
     }
 
