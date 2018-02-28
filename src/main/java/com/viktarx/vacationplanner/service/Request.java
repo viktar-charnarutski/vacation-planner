@@ -1,4 +1,4 @@
-package com.viktarx.service;
+package com.viktarx.vacationplanner.service;
 
 /**
  * HTTP main request.

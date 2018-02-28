@@ -1,6 +1,6 @@
-package com.viktarx.service;
+package com.viktarx.vacationplanner.service;
 
-import com.viktarx.agent.VacationTrip;
+import com.viktarx.vacationplanner.agent.VacationTrip;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
