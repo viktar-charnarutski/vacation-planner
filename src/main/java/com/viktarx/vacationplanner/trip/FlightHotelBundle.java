@@ -1,4 +1,4 @@
-package com.viktarx.vacationplanner.agent;
+package com.viktarx.vacationplanner.trip;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -12,17 +12,17 @@ public final class FlightHotelBundle implements VacationTrip {
     private final String destination;
     private final LocalDate startDate;
     private final LocalDate endDate;
-    private final Price price;
+    private final TripDeal tripDeal;
     private final Hotel hotel;
     private final URL url;
 
-    FlightHotelBundle(String departure, String destination, LocalDate startDate, LocalDate endDate, Price price, Hotel hotel, URL url) {
-        checkArguments(departure, destination, startDate, endDate, price, hotel, url);
+    FlightHotelBundle(String departure, String destination, LocalDate startDate, LocalDate endDate, TripDeal tripDeal, Hotel hotel, URL url) {
+        checkArguments(departure, destination, startDate, endDate, tripDeal, hotel, url);
         this.departure = departure;
         this.destination = destination;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.price = price;
+        this.tripDeal = tripDeal;
         this.hotel = hotel;
         this.url = url;
     }
@@ -48,8 +48,8 @@ public final class FlightHotelBundle implements VacationTrip {
     }
 
     @Override
-    public Price price() {
-        return price;
+    public TripDeal price() {
+        return tripDeal;
     }
 
     public Hotel hotel() {
@@ -60,10 +60,10 @@ public final class FlightHotelBundle implements VacationTrip {
         return url;
     }
 
-    private static void checkArguments(String departure, String destination, LocalDate startDate, LocalDate endDate, Price price, Hotel hotel, URL url) {
+    private static void checkArguments(String departure, String destination, LocalDate startDate, LocalDate endDate, TripDeal tripDeal, Hotel hotel, URL url) {
         checkLocations(departure, destination);
         checkDates(startDate, endDate);
-        checkPrice(price);
+        checkPrice(tripDeal);
         checkHotel(hotel);
         checkUrl(url);
     }
@@ -84,9 +84,9 @@ public final class FlightHotelBundle implements VacationTrip {
                     startDate, endDate));
     }
 
-    private static void checkPrice(Price price) {
-        if (price == null)
-            throw new IllegalArgumentException("Price object could not be null");
+    private static void checkPrice(TripDeal tripDeal) {
+        if (tripDeal == null)
+            throw new IllegalArgumentException("TripDeal object could not be null");
     }
 
     private static void checkHotel(Hotel hotel) {
@@ -110,7 +110,7 @@ public final class FlightHotelBundle implements VacationTrip {
         if (!destination.equals(flightHotelBundle.destination)) return false;
         if (!startDate.equals(flightHotelBundle.startDate)) return false;
         if (!endDate.equals(flightHotelBundle.endDate)) return false;
-        if (!price.equals(flightHotelBundle.price)) return false;
+        if (!tripDeal.equals(flightHotelBundle.tripDeal)) return false;
         if (!hotel.equals(flightHotelBundle.hotel)) return false;
         return url.equals(flightHotelBundle.url);
     }
@@ -121,7 +121,7 @@ public final class FlightHotelBundle implements VacationTrip {
         result = 31 * result + destination.hashCode();
         result = 31 * result + startDate.hashCode();
         result = 31 * result + endDate.hashCode();
-        result = 31 * result + price.hashCode();
+        result = 31 * result + tripDeal.hashCode();
         result = 31 * result + hotel.hashCode();
         result = 31 * result + url.hashCode();
         return result;
@@ -134,7 +134,7 @@ public final class FlightHotelBundle implements VacationTrip {
                 ", destination='" + destination + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", price=" + price +
+                ", tripDeal=" + tripDeal +
                 ", hotel=" + hotel +
                 ", url=" + url +
                 '}';

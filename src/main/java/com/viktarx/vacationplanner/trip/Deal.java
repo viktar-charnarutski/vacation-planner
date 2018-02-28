@@ -1,4 +1,4 @@
-package com.viktarx.vacationplanner.agent;
+package com.viktarx.vacationplanner.trip;
 
 /**
  * Deal's functional structure.

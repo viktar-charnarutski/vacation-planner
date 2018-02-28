@@ -1,4 +1,4 @@
-package com.viktarx.vacationplanner.agent;
+package com.viktarx.vacationplanner.trip;
 
 import java.time.LocalDate;
 
@@ -15,6 +15,6 @@ public interface VacationTrip {
 
     LocalDate endDate();
 
-    Price price();
+    TripDeal price();
 
 }
