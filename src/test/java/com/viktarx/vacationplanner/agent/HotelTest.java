@@ -21,27 +21,27 @@ public class HotelTest {
     }
 
     @Test
-    public void name() throws Exception {
+    public void name() {
         assertEquals("San Souce", hotel.name());
     }
 
     @Test
-    public void address() throws Exception {
+    public void address() {
         assertEquals("A3, St-Mary, Jamaica", hotel.address());
     }
 
     @Test
-    public void type() throws Exception {
+    public void type() {
         assertEquals("All Inclusive", hotel.type());
     }
 
     @Test
-    public void stars() throws Exception {
+    public void stars() {
         assertTrue(4.0 == hotel.stars());
     }
 
     @Test
-    public void rating() throws Exception {
+    public void rating() {
         assertTrue(4.8 == hotel.rating());
     }
 

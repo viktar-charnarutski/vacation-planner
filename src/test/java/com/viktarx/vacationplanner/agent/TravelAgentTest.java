@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
  */
 public class TravelAgentTest {
     @Test
-    public void offerTripsForVacationPlan() throws Exception {
+    public void offerTripsForVacationPlan() {
         VacationPlan vacationPlan = new VacationPlan(LocalDate.now().plusDays(5), LocalDate.now().plusDays(10), 2,
                 "SFO", "MBJ");
         TripService service = new TravelerService(

@@ -16,22 +16,22 @@ public class DateRangeTest {
             LocalDate.of(2017, Month.SEPTEMBER, 25));
 
     @Test
-    public void startDate() throws Exception {
+    public void startDate() {
         assertEquals(LocalDate.of(2017, Month.SEPTEMBER, 20), validDateRange.startDate());
     }
 
     @Test
-    public void endDate() throws Exception {
+    public void endDate() {
         assertEquals(LocalDate.of(2017, Month.SEPTEMBER, 25), validDateRange.endDate());
     }
 
     @Test
-    public void duration() throws Exception {
+    public void duration() {
         assertEquals(5, validDateRange.duration());
     }
 
     @Test
-    public void startDateIsBeforeEndDate() throws Exception {
+    public void startDateIsBeforeEndDate() {
         boolean exceptionIsThrown = false;
         try {
             new DateRange(LocalDate.of(2017, Month.SEPTEMBER, 20),
@@ -43,7 +43,7 @@ public class DateRangeTest {
     }
 
     @Test
-    public void startDateIsEqualToEndDate() throws Exception {
+    public void startDateIsEqualToEndDate() {
         boolean exceptionIsThrown = false;
         try {
             new DateRange(LocalDate.of(2017, Month.SEPTEMBER, 20),

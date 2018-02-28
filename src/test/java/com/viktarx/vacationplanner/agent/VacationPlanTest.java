@@ -13,37 +13,37 @@ import static org.junit.Assert.*;
  */
 public class VacationPlanTest {
     @Test
-    public void possibleStartDate() throws Exception {
+    public void possibleStartDate() {
         assertEquals(LocalDate.now().plusDays(5), new VacationPlan(LocalDate.now().plusDays(5), LocalDate.now().plusDays(10), 2,
                 "SFO", "MBJ").possibleStartDate());
     }
 
     @Test
-    public void possibleEndDate() throws Exception {
+    public void possibleEndDate() {
         assertEquals(LocalDate.now().plusDays(10), new VacationPlan(LocalDate.now().plusDays(5), LocalDate.now().plusDays(10), 2,
                 "SFO", "MBJ").possibleEndDate());
     }
 
     @Test
-    public void minDurationInDays() throws Exception {
+    public void minDurationInDays() {
         assertTrue(2 == new VacationPlan(LocalDate.now().plusDays(5), LocalDate.now().plusDays(10), 2,
                 "SFO", "MBJ").minDurationInDays());
     }
 
     @Test
-    public void departureCity() throws Exception {
+    public void departureCity() {
         assertEquals("SFO", new VacationPlan(LocalDate.now().plusDays(5), LocalDate.now().plusDays(10), 2,
                 "SFO", "MBJ").departure());
     }
 
     @Test
-    public void destinationCity() throws Exception {
+    public void destinationCity() {
         assertEquals("MBJ", new VacationPlan(LocalDate.now().plusDays(5), LocalDate.now().plusDays(10), 2,
                 "SFO", "MBJ").destination());
     }
 
     @Test
-    public void optionsForDateRanges() throws Exception {
+    public void optionsForDateRanges() {
         VacationPlan vacationPlan = new VacationPlan(LocalDate.now().plusDays(5), LocalDate.now().plusDays(10), 2,
                 "SFO", "MBJ");
 
