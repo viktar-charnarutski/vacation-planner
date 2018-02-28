@@ -1,4 +1,4 @@
-package com.viktarx.service;
+package com.viktarx.vacationplanner.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;

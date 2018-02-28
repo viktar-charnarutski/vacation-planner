@@ -1,6 +1,5 @@
-package com.viktarx;
+package com.viktarx.vacationplanner;
 
-import java.io.InputStream;
 import java.util.concurrent.*;
 
 /**

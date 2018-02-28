@@ -1,6 +1,6 @@
-package com.viktarx.agent;
+package com.viktarx.vacationplanner.agent;
 
-import com.viktarx.service.TripService;
+import com.viktarx.vacationplanner.service.TripService;
 
 import java.util.HashSet;
 import java.util.Set;

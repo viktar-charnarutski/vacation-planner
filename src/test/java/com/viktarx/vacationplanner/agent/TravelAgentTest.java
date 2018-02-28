@@ -1,8 +1,8 @@
-package com.viktarx.agent;
+package com.viktarx.vacationplanner.agent;
 
-import com.viktarx.service.TravelerRequest;
-import com.viktarx.service.TravelerService;
-import com.viktarx.service.TripService;
+import com.viktarx.vacationplanner.service.TravelerRequest;
+import com.viktarx.vacationplanner.service.TravelerService;
+import com.viktarx.vacationplanner.service.TripService;
 import org.junit.Test;
 
 import java.time.LocalDate;
