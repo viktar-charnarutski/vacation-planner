@@ -15,12 +15,12 @@ public class FlightHotelBundleTest {
 
     private Hotel hotel;
     private FlightHotelBundle flightHotelBundle;
-    private TripDeal tripDeal;
+    private TripPrice tripPrice;
 
     public FlightHotelBundleTest() throws MalformedURLException {
         hotel = new Hotel("San Souce", "A3, St-Mary, Jamaica", "All Inclusive", 4.0, 4.8, new URL("http://couples.com/resorts/sans-souci"));
-        tripDeal = new TripDeal(1099.0, 999.9);
-        flightHotelBundle = new FlightHotelBundle("SFO", "MJB", LocalDate.now(), LocalDate.now().plusDays(5), tripDeal, hotel, new URL("https://www.example.com"));
+        tripPrice = new TripPrice(1099.0, 999.9);
+        flightHotelBundle = new FlightHotelBundle("SFO", "MJB", LocalDate.now(), LocalDate.now().plusDays(5), tripPrice, hotel, new URL("https://www.example.com"));
     }
 
     @Test

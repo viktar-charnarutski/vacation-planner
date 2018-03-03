@@ -1,14 +1,14 @@
 package com.viktarx.vacationplanner.trip;
 
 /**
- * TripDeal representation.
+ * TripPrice representation.
  */
-public final class TripDeal implements Deal {
+public final class TripPrice implements Price {
 
     private final double originalPriceInUsd;
     private final double discountPriceInUsd;
 
-    TripDeal(double originalPriceInUsd, double discountPriceInUsd) {
+    TripPrice(double originalPriceInUsd, double discountPriceInUsd) {
         checkParameters(originalPriceInUsd, discountPriceInUsd);
         this.originalPriceInUsd = originalPriceInUsd;
         this.discountPriceInUsd = discountPriceInUsd;
@@ -32,12 +32,12 @@ public final class TripDeal implements Deal {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TripDeal)) return false;
+        if (!(o instanceof TripPrice)) return false;
 
-        TripDeal tripDeal = (TripDeal) o;
+        TripPrice tripPrice = (TripPrice) o;
 
-        if (Double.compare(tripDeal.originalPriceInUsd, originalPriceInUsd) != 0) return false;
-        return Double.compare(tripDeal.discountPriceInUsd, discountPriceInUsd) == 0;
+        if (Double.compare(tripPrice.originalPriceInUsd, originalPriceInUsd) != 0) return false;
+        return Double.compare(tripPrice.discountPriceInUsd, discountPriceInUsd) == 0;
     }
 
     @Override
@@ -53,7 +53,7 @@ public final class TripDeal implements Deal {
 
     @Override
     public String toString() {
-        return "TripDeal{" +
+        return "TripPrice{" +
                 "originalPriceInUsd=" + originalPriceInUsd +
                 ", discountPriceInUsd=" + discountPriceInUsd +
                 '}';
@@ -61,10 +61,10 @@ public final class TripDeal implements Deal {
 
     private static void checkParameters(double originalPriceInUsd, double finalPriceInUsd) {
         if (originalPriceInUsd < 0)
-            throw new IllegalArgumentException(String.format("TripDeal %s should not be negative.", originalPriceInUsd));
+            throw new IllegalArgumentException(String.format("TripPrice %s should not be negative.", originalPriceInUsd));
 
         if (finalPriceInUsd < 0)
-            throw new IllegalArgumentException(String.format("TripDeal %s should not be negative.", finalPriceInUsd));
+            throw new IllegalArgumentException(String.format("TripPrice %s should not be negative.", finalPriceInUsd));
 
         if (originalPriceInUsd < finalPriceInUsd)
             throw new IllegalArgumentException(String.format("Original price %s should not be less than discount price %s.",

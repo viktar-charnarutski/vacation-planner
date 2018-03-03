@@ -5,32 +5,32 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Tests for the TripDeal class.
+ * Tests for the TripPrice class.
  */
-public class TripDealTest {
+public class TripPriceTest {
 
-    private TripDeal validTripDeal = new TripDeal(1099.0, 999.9);
+    private TripPrice validTripPrice = new TripPrice(1099.0, 999.9);
 
     @Test
     public void originalPriceInUsd() {
-        assertTrue(1099.0 == validTripDeal.originalPriceInUsd());
+        assertTrue(1099.0 == validTripPrice.originalPriceInUsd());
     }
 
     @Test
     public void discountPriceInUsd() {
-        assertTrue(999.9 == validTripDeal.discountPriceInUsd());
+        assertTrue(999.9 == validTripPrice.discountPriceInUsd());
     }
 
     @Test
     public void discountPercentage() {
-        assertTrue(9.01728844404004 == validTripDeal.discountPercentage());
+        assertTrue(9.01728844404004 == validTripPrice.discountPercentage());
     }
 
     @Test
     public void wrongDiscountPriceCheck() {
         boolean checkHandled = false;
         try {
-            new TripDeal(899.0, 999.9);
+            new TripPrice(899.0, 999.9);
         } catch (IllegalArgumentException e) {
             checkHandled = true;
         }
@@ -41,7 +41,7 @@ public class TripDealTest {
     public void negativeDiscountPriceCheck() {
         boolean checkHandled = false;
         try {
-            new TripDeal(899.0, -1.0);
+            new TripPrice(899.0, -1.0);
         } catch (IllegalArgumentException e) {
             checkHandled = true;
         }
@@ -52,7 +52,7 @@ public class TripDealTest {
     public void negativeOriginalPriceCheck() {
         boolean checkHandled = false;
         try {
-            new TripDeal(-1.0, 999.9);
+            new TripPrice(-1.0, 999.9);
         } catch (IllegalArgumentException e) {
             checkHandled = true;
         }

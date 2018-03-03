@@ -1,9 +1,9 @@
 package com.viktarx.vacationplanner.trip;
 
 /**
- * Deal's functional structure.
+ * Price's functional structure.
  */
-public interface Deal {
+public interface Price {
 
     double originalPriceInUsd();
 
