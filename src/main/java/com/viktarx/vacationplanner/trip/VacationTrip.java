@@ -15,6 +15,6 @@ public interface VacationTrip {
 
     LocalDate endDate();
 
-    TripPrice price();
+    Price price();
 
 }
